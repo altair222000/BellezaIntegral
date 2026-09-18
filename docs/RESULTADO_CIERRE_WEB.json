@@ -1,0 +1,46 @@
+[
+  {
+    "prueba": "Registro de las 24 pantallas",
+    "correcto": true
+  },
+  {
+    "prueba": "GET /",
+    "correcto": true
+  },
+  {
+    "prueba": "GET /api/v1/health",
+    "correcto": true
+  },
+  {
+    "prueba": "GET /api/v1/health/db",
+    "correcto": true
+  },
+  {
+    "prueba": "GET /api/v1/productos",
+    "correcto": true
+  },
+  {
+    "prueba": "GET /api/v1/promociones",
+    "correcto": true
+  },
+  {
+    "prueba": "Protección sin sesión /api/v1/recordatorios",
+    "correcto": true
+  },
+  {
+    "prueba": "Protección sin sesión /api/v1/admin/clientes",
+    "correcto": true
+  },
+  {
+    "prueba": "Protección sin sesión /api/v1/admin/inventario/movimientos",
+    "correcto": true
+  },
+  {
+    "prueba": "Protección sin sesión /api/v1/puntos",
+    "correcto": true
+  },
+  {
+    "prueba": "Carga de prueba única de 100 puntos",
+    "correcto": true
+  }
+]

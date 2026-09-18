@@ -1,0 +1,372 @@
+{
+  "version": "1.1.1",
+  "fecha_utc": "2026-09-13T19:17:34.559605+00:00",
+  "aprobado": true,
+  "comprobaciones": [
+    {
+      "comprobacion": "Contrato coincide con todas las operaciones de Flask",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/citas",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/admin/citas/{cita_id}/estado",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/clientes",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/clientes/{cliente_id}/citas",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PUT /api/v1/admin/disponibilidades/{horario_id}",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/admin/disponibilidades/{horario_id}/estado",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/inventario/movimientos",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/admin/inventario/movimientos",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/pedidos",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/admin/pedidos/{pedido_id}/cancelar",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/admin/personal",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/personal/{personal_id}/disponibilidades",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/productos",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/admin/productos",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PUT /api/v1/admin/productos/{producto_id}",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/admin/productos/{producto_id}/estado",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/promociones",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/admin/promociones",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PUT /api/v1/admin/promociones/{promocion_id}",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/admin/promociones/{promocion_id}/estado",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/admin/puntos/asignar",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/puntos/historial",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/reportes/citas.xlsx",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/reportes/resumen",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/servicios",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/usuarios",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/admin/usuarios",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/admin/usuarios/{usuario_id}",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/admin/usuarios/{usuario_id}/estado",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/admin/usuarios/{usuario_id}/rol",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/admin/verificar",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/agenda",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/agenda/{cita_id}/estado",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/auth/logout",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/auth/password",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/auth/perfil",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/auth/perfil",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/citas",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/citas/{cita_id}/cancelar",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/citas/{cita_id}/reprogramar",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/citas/mias",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/pedidos",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/pedidos/{pedido_id}",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/pedidos/mios",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/personal/{personal_id}/disponibilidades",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/puntos",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/puntos/canjear",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/puntos/historial",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: GET /api/v1/recordatorios",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: POST /api/v1/servicios",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PUT /api/v1/servicios/{servicio_id}",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "Sin sesión: PATCH /api/v1/servicios/{servicio_id}/estado",
+      "correcto": true,
+      "http": 401
+    },
+    {
+      "comprobacion": "GET /api/v1/health",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/health/db",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/servicios",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/productos",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/promociones",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/personal",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "Login de comprobación",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "Cuenta de comprobación administradora",
+      "correcto": true
+    },
+    {
+      "comprobacion": "GET /api/v1/admin/usuarios",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/admin/citas",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/admin/servicios",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/admin/productos",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/admin/inventario/movimientos",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/admin/pedidos",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/admin/promociones",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/admin/puntos/historial",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "GET /api/v1/admin/reportes/resumen",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "Exportación XLSX legible",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "Cierre de sesión",
+      "correcto": true,
+      "http": 200
+    },
+    {
+      "comprobacion": "Token cerrado ya no permite acceso",
+      "correcto": true,
+      "http": 401
+    }
+  ],
+  "alcance": "Flask test_client sobre la BD configurada; no verifica TCP, HTTPS ni interfaces. No modifica datos del negocio; abre y revoca una sesión."
+}
