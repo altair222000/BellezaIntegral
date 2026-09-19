@@ -126,7 +126,7 @@ Para aplicar la migración:
 
     python scripts/instalar_suscripciones_remoto.py --apply
 
-Al finalizar vuelve a verificar automáticamente:
+El modo `--apply` vuelve a verificar automáticamente al finalizar. También puedes comprobar después con:\n\n    python scripts/instalar_suscripciones_remoto.py --verify\n\nLa verificación comprueba:
 
 - 3 tablas;
 - 2 vistas;
