@@ -412,3 +412,86 @@ def test_renew_only_within_two_days_of_expiry(
         },
     )
     assert again.status_code == 409
+
+
+def test_service_discount_is_shown_for_active_subscription(
+    client,
+    headers,
+):
+    plan_id = create_plan(client, headers)
+    call(
+        client,
+        headers,
+        "/suscripciones",
+        "POST",
+        {
+            "plan_id": plan_id,
+            "metodo_pago": "efectivo",
+            "clave_operacion": "suscripcion_servicio_0001",
+        },
+        id=2,
+        expected=201,
+    )
+
+    service_id = call(
+        client,
+        headers,
+        "/servicios",
+        "POST",
+        {
+            "nombre": "Servicio membresía",
+            "descripcion": "Prueba descuento",
+            "categoria": "Uñas",
+            "duracion_min": 60,
+            "precio": "100.00",
+        },
+        id=1,
+        expected=201,
+    )["data"]["id"]
+
+    catalog = call(
+        client,
+        headers,
+        "/servicios?pagina=1&limite=20",
+        id=2,
+    )
+    service = next(
+        s for s in catalog["data"]
+        if s["id"] == service_id
+    )
+
+    assert service["precio_original"] == "100.00"
+    assert service["precio"] == "90.00"
+    assert service["descuento_suscripcion"] == 10
+
+
+def test_anonymous_service_catalog_keeps_base_price(
+    client,
+    headers,
+):
+    service_id = call(
+        client,
+        headers,
+        "/servicios",
+        "POST",
+        {
+            "nombre": "Servicio público",
+            "descripcion": "Sin descuento anónimo",
+            "categoria": "Uñas",
+            "duracion_min": 30,
+            "precio": "80.00",
+        },
+        id=1,
+        expected=201,
+    )["data"]["id"]
+
+    r = client.get("/api/v1/servicios?pagina=1&limite=20")
+    assert r.status_code == 200
+    service = next(
+        s for s in r.get_json()["data"]
+        if s["id"] == service_id
+    )
+
+    assert service["precio_original"] == "80.00"
+    assert service["precio"] == "80.00"
+    assert service["descuento_suscripcion"] == 0

@@ -30,6 +30,32 @@ def descuento_productos_activo(conexion, usuario_id, bloquear=False):
     return int(valor or 0)
 
 
+def descuento_servicios_activo(conexion, usuario_id, bloquear=False):
+    """Devuelve el porcentaje de descuento de servicios vigente."""
+    if not usuario_id:
+        return 0
+
+    bloqueo = " FOR SHARE" if bloquear else ""
+    valor = conexion.execute(
+        text(
+            """
+            SELECT descuento_servicios_contratado
+            FROM suscripciones
+            WHERE usuario_id=:usuario_id
+              AND estado='activa'
+              AND fecha_inicio<=NOW()
+              AND fecha_fin>NOW()
+            ORDER BY fecha_fin DESC, id DESC
+            LIMIT 1
+            """
+            + bloqueo
+        ),
+        {"usuario_id": usuario_id},
+    ).scalar_one_or_none()
+
+    return int(valor or 0)
+
+
 def precio_con_descuento(precio, porcentaje):
     """Aplica el porcentaje y redondea a centavos."""
     precio = Decimal(precio)
