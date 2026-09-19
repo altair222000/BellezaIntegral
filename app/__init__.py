@@ -46,8 +46,9 @@ def create_app():
     from .reportes_routes import reportes
     from .visor_routes import visor
     from .auditoria_routes import auditoria
+    from .suscripciones_routes import suscripciones
     from .integracion import configurar_integracion
-    for blueprint in (tienda, fidelizacion, cuentas, horarios, reportes, visor, auditoria):
+    for blueprint in (tienda, fidelizacion, cuentas, horarios, reportes, visor, auditoria, suscripciones):
         app.register_blueprint(blueprint)
     configurar_integracion(app)
     return app

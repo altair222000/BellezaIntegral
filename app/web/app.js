@@ -43,7 +43,7 @@ async function action(fn){try{await fn();}catch(e){if(e.name!=='AbortError')say(
 function go(next){view=next;pageNumber=1;say('');render();}
 function navigation(){
  const primary=['Inicio','Servicios','Productos','Promociones',...(!user?['Registrarme']:[])];
- const workspace=user?['Mi cuenta',...(user.rol==='cliente'?['Mis citas','Recordatorios','Carrito','Mis pedidos','Mis puntos']:user.rol==='personal'?['Mi agenda','Recordatorios']:['Usuarios','Clientes','Citas admin','Servicios admin','Horarios','Inventario','Movimientos de inventario','Pedidos admin','Promociones admin','Puntos admin','Reportes'])]:['Ingresar','Registrarme'];
+ const workspace=user?['Mi cuenta',...(user.rol==='cliente'?['Mis citas','Recordatorios','Carrito','Mis pedidos','Mis puntos','Mi suscripción']:user.rol==='personal'?['Mi agenda','Recordatorios']:['Usuarios','Clientes','Citas admin','Servicios admin','Horarios','Inventario','Movimientos de inventario','Pedidos admin','Promociones admin','Puntos admin','Planes suscripción','Suscripciones admin','Pagos suscripción','Reportes'])]:['Ingresar','Registrarme'];
  const buttons=items=>items.map(i=>`<button type="button" data-view="${esc(i)}" class="${view===i?'selected':''}" ${view===i?'aria-current="page"':''}>${esc(i)}</button>`).join('');
  $('#nav').innerHTML='<div class="primary-nav">'+buttons(primary)+'</div>'+(user?'<div class="workspace-nav"><span class="workspace-label">Tu espacio</span>'+buttons(workspace)+'</div>':'');
  $('#nav').classList.remove('open');$('#menuToggle').setAttribute('aria-expanded','false');
@@ -62,9 +62,16 @@ let pendingService=null;
 const serviceSymbol='<svg viewBox="0 0 60 80" fill="none" aria-hidden="true"><path d="M20 6h20v22H20zM17 30h26a6 6 0 0 1 6 6v34a6 6 0 0 1-6 6H17a6 6 0 0 1-6-6V36a6 6 0 0 1 6-6Z" stroke-width="1.5"/><path d="m30 43 3 7 7 3-7 3-3 7-3-7-7-3 7-3z" stroke-width="1.2"/><path d="M25 9v16m5-16v16m5-16v16"/></svg>';
 function collectServices(items){items.forEach(s=>serviceCache.set(Number(s.id),s));}
 function bindReservations(){bind('[data-reserve]',async b=>{const id=Number(b.dataset.reserve);if(!user){pendingService=id;view='Ingresar';say('Inicia sesión para continuar con tu reserva.');return render();}if(user.rol!=='cliente')throw new Error('Las reservas se realizan desde una cuenta cliente.');await reserva(id);});}
+function servicePriceHtml(s){
+ const d=Number(s.descuento_suscripcion||0);
+ return d>0
+  ?`<span class="price"><del>${quetzales(s.precio_original)}</del> ${quetzales(s.precio)}</span><span class="badge">-${esc(d)}% membresía</span>`
+  :`<span class="price">${quetzales(s.precio)}</span>`;
+}
 function serviceCard(s,preview=false){
- if(preview)return `<article class="service-preview"><span class="badge">${esc(s.categoria)}</span><h3>${esc(s.nombre)}</h3><p>${esc(s.descripcion||'Consulta los horarios y elige tu próxima cita.')}</p><div class="service-end"><p class="price">Q ${esc(s.precio)}<small>${esc(s.duracion_min)} minutos</small></p><button data-reserve="${Number(s.id)}">Reservar <span aria-hidden="true">↗</span></button></div></article>`;
- return `<article class="service-card"><div class="service-visual">${serviceSymbol}</div><div class="service-body"><span class="badge">${esc(s.categoria)}</span><h2>${esc(s.nombre)}</h2><p class="description">${esc(s.descripcion||'Consulta los horarios y elige tu próxima cita.')}</p><div class="service-meta"><span class="duration">${esc(s.duracion_min)} minutos</span><p class="price">Q ${esc(s.precio)}</p></div><button data-reserve="${Number(s.id)}">Reservar este servicio <span aria-hidden="true">↗</span></button></div></article>`;
+ const price=servicePriceHtml(s);
+ if(preview)return `<article class="service-preview"><span class="badge">${esc(s.categoria)}</span><h3>${esc(s.nombre)}</h3><p>${esc(s.descripcion||'Consulta los horarios y elige tu próxima cita.')}</p><div class="service-end"><div>${price}<small>${esc(s.duracion_min)} minutos</small></div><button data-reserve="${Number(s.id)}">Reservar <span aria-hidden="true">↗</span></button></div></article>`;
+ return `<article class="service-card"><div class="service-visual">${serviceSymbol}</div><div class="service-body"><span class="badge">${esc(s.categoria)}</span><h2>${esc(s.nombre)}</h2><p class="description">${esc(s.descripcion||'Consulta los horarios y elige tu próxima cita.')}</p><div class="service-meta"><span class="duration">${esc(s.duracion_min)} minutos</span><div>${price}</div></div><button data-reserve="${Number(s.id)}">Reservar este servicio <span aria-hidden="true">↗</span></button></div></article>`;
 }
 screens.Inicio=async()=>{
  main.innerHTML=`<section class="home-hero" aria-labelledby="homeTitle"><div class="hero-copy"><span class="eyebrow">Belleza integral · tu espacio</span><h1 id="homeTitle">Un momento para ti.<br><em>Para sentirte bien.</em></h1><p>Haz espacio para cuidarte. Explora nuestros servicios y encuentra el momento para tu próxima cita.</p><div class="hero-buttons"><button data-go="Servicios">Reservar una cita <span aria-hidden="true">↗</span></button><button class="secondary" data-how>Cómo reservar</button></div><div class="hero-footnote"><span aria-hidden="true">✧</span><span>Elige tu servicio, profesional y horario.</span></div></div><div class="hero-art"><img src="/visor/salon.svg" width="620" height="650" alt="Ilustración de un tocador con espejo, esmalte y una planta"><div class="art-caption"><span>TU BELLEZA, NUESTRA PASIÓN</span><strong>El cuidado empieza contigo.</strong></div></div></section><div class="benefit-strip"><div><b aria-hidden="true">01</b>Reserva desde donde estés</div><div><b aria-hidden="true">02</b>Elige a tu profesional</div><div><b aria-hidden="true">03</b>Gestiona tus citas</div></div><section class="home-services" aria-labelledby="servicesTitle"><div class="section-intro"><span class="eyebrow">Nuestro catálogo</span><h2 id="servicesTitle">Encuentra tu<br>próximo cuidado.</h2><p>Consulta precios y duración antes de reservar. Los horarios disponibles se muestran al elegir a tu profesional.</p><button class="text-link" data-go="Servicios">Ver todos los servicios <span aria-hidden="true">→</span></button></div><div id="featuredServices" class="service-list" aria-live="polite"><p class="loading">Cargando servicios…</p></div></section><section class="how-section" id="how" aria-labelledby="howTitle"><div class="how-heading"><span class="eyebrow">Así de sencillo</span><h2 id="howTitle" tabindex="-1">Tu próxima cita, en tres pasos.</h2></div><div class="steps"><div><span class="step-number">01</span><h3>Elige tu servicio</h3><p>Encuentra en el catálogo el cuidado que buscas y consulta sus detalles.</p></div><div><span class="step-number">02</span><h3>Encuentra tu momento</h3><p>Ingresa a tu cuenta, elige un profesional y consulta sus horarios.</p></div><div><span class="step-number">03</span><h3>Revisa tu confirmación</h3><p>La reserva queda pendiente. Consulta la confirmación del profesional en Mis citas.</p></div></div></section><section class="final-cta"><span class="eyebrow">A tu ritmo</span><h2>Dedícate ese momento.</h2><p>Tu próxima cita está a unos pasos.</p><button data-go="Servicios">Explorar servicios <span aria-hidden="true">↗</span></button></section>`;
@@ -74,14 +81,15 @@ screens.Inicio=async()=>{
 };
 screens.Servicios=async()=>{
  const r=await api('/servicios?pagina='+pageNumber);collectServices(r.data);
- main.innerHTML='<div class="page-heading"><div><span class="eyebrow">Elige tu próximo cuidado</span><h1>Servicios para ti.</h1><p>Consulta los detalles y reserva el horario que mejor se adapte a tu día.</p></div><p class="catalog-hint">Precios en quetzales.<br>Horarios según disponibilidad.</p></div>'+(r.data.length?'<div class="catalog-grid">'+r.data.map(s=>serviceCard(s)).join('')+'</div>':'<div class="empty-state"><h2>No hay servicios en esta página.</h2><p>Consulta la página anterior o vuelve más tarde.</p></div>');
+ const memberDiscount=r.data.reduce((m,s)=>Math.max(m,Number(s.descuento_suscripcion||0)),0);
+ main.innerHTML='<div class="page-heading"><div><span class="eyebrow">Elige tu próximo cuidado</span><h1>Servicios para ti.</h1><p>'+(memberDiscount?'Tu membresía aplica '+memberDiscount+'% de descuento a los servicios mostrados.':'Consulta los detalles y reserva el horario que mejor se adapte a tu día.')+'</p></div><p class="catalog-hint">Precios en quetzales.<br>Horarios según disponibilidad.</p></div>'+(r.data.length?'<div class="catalog-grid">'+r.data.map(s=>serviceCard(s)).join('')+'</div>':'<div class="empty-state"><h2>No hay servicios en esta página.</h2><p>Consulta la página anterior o vuelve más tarde.</p></div>');
  bindReservations();pager(r.meta);
 };
 async function reserva(service){
  view='Servicios';navigation();
  const people=(await api('/personal')).data;
  const selected=serviceCache.get(Number(service));
- main.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Tu próxima cita</span><h1>Encuentra tu momento.</h1><p>Selecciona al profesional y consulta sus horarios antes de reservar.</p></div><button class="secondary" data-go="Servicios">Volver al catálogo</button></div><div class="booking-layout"><form id="search" class="panel">${formFields([field('personal_id','Profesional','select',people.map(p=>({value:p.id,label:p.nombre}))),field('fecha','Fecha','date')],{fecha:dateToday()})}<div class="actions"><button ${people.length?'':'disabled'}>Consultar horarios</button></div>${people.length?'':'<p>No hay profesionales disponibles en este momento.</p>'}</form><aside class="booking-summary"><span class="eyebrow">Tu selección</span><h2>${esc(selected?.nombre||'Servicio seleccionado')}</h2>${selected?`<p>${esc(selected.duracion_min)} minutos</p><div class="price">Q ${esc(selected.precio)}</div>`:''}<p>La reserva quedará pendiente de confirmación del profesional. Podrás consultarla en Mis citas.</p></aside></div><div id="slots" class="slots" aria-live="polite"></div>`;
+ main.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Tu próxima cita</span><h1>Encuentra tu momento.</h1><p>Selecciona al profesional y consulta sus horarios antes de reservar.</p></div><button class="secondary" data-go="Servicios">Volver al catálogo</button></div><div class="booking-layout"><form id="search" class="panel">${formFields([field('personal_id','Profesional','select',people.map(p=>({value:p.id,label:p.nombre}))),field('fecha','Fecha','date')],{fecha:dateToday()})}<div class="actions"><button ${people.length?'':'disabled'}>Consultar horarios</button></div>${people.length?'':'<p>No hay profesionales disponibles en este momento.</p>'}</form><aside class="booking-summary"><span class="eyebrow">Tu selección</span><h2>${esc(selected?.nombre||'Servicio seleccionado')}</h2>${selected?`<p>${esc(selected.duracion_min)} minutos</p><div>${servicePriceHtml(selected)}</div>`:''}<p>La reserva quedará pendiente de confirmación del profesional. Podrás consultarla en Mis citas.</p></aside></div><div id="slots" class="slots" aria-live="polite"></div>`;
  $('#f_fecha').min=dateToday();
  $('#search').onsubmit=e=>{e.preventDefault();action(async()=>{
  const d=Object.fromEntries(new FormData(e.target)),submit=e.submitter;submit.disabled=true;$('#slots').innerHTML='<p>Consultando horarios…</p>';
@@ -99,9 +107,16 @@ function readableDate(value){const [y,m,d]=String(value).split('-').map(Number);
 function appointmentFuture(c){return new Date(`${c.fecha}T${String(c.hora).slice(0,5)}:00-06:00`).getTime()>Date.now();}
 const statusText={pendiente:'Pendiente',confirmada:'Confirmada',cancelada:'Cancelada',completada:'Completada'};
 screens['Mi cuenta']=async()=>{
- const r=await api('/auth/perfil'),p=r.data;
+ const profileRequest=api('/auth/perfil');
+ const subscriptionRequest=user?.rol==='cliente'?api('/suscripciones/mia'):Promise.resolve({data:null});
+ const [r,subscriptionResult]=await Promise.all([profileRequest,subscriptionRequest]),p=r.data,s=subscriptionResult.data;
  const initials=String(p.nombre).trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase();
- main.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Tu espacio personal</span><h1>Mi cuenta</h1><p>Mantén tus datos al día y gestiona el acceso a tu cuenta.</p></div></div><div class="account-layout"><article class="profile-card"><span class="profile-avatar" aria-hidden="true">${esc(initials)}</span><h2>${esc(p.nombre)}</h2><span class="badge">${esc(p.rol==='cliente'?'Cliente':p.rol==='personal'?'Profesional':'Administración')}</span>${p.rol==='cliente'?`<div class="profile-points"><span>Mis puntos</span><strong>${esc(p.puntos??0)}</strong><button class="text-link" data-go="Mis puntos">Consultar movimientos →</button></div>`:''}</article><div class="account-panels"><section class="card"><div class="section-title"><h2>Datos de contacto</h2><button id="edit" class="secondary">Editar datos</button></div><dl class="profile-details"><div><dt>Nombre</dt><dd>${esc(p.nombre)}</dd></div><div><dt>Correo electrónico</dt><dd>${esc(p.email||'No registrado')}</dd></div><div><dt>Teléfono</dt><dd>${esc(p.telefono||'No registrado')}</dd></div></dl><p class="muted small-copy">Puedes ingresar con tu correo o teléfono registrado.</p></section><section class="card"><span class="eyebrow">Acceso a tu cuenta</span><h2>Contraseña y sesión</h2><p class="muted small-copy">Al cambiar la contraseña tendrás que iniciar sesión nuevamente. Refrescar la página conserva una sesión que todavía está vigente.</p><button id="password" class="secondary">Cambiar contraseña</button></section></div></div>`;
+ const subscriptionCard=p.rol==='cliente'
+  ?(s&&s.estado==='activa'
+    ?`<section class="card"><span class="eyebrow">Membresía</span><div class="section-title"><h2>${esc(s.plan)}</h2><span class="badge">Activa</span></div><p><strong>Vigente hasta:</strong> ${esc(String(s.fecha_fin).replace('T',' ').slice(0,16))}</p><p><strong>Descuento en productos:</strong> ${esc(s.descuento_productos_contratado)}%</p><p><strong>Descuento en servicios:</strong> ${esc(s.descuento_servicios_contratado)}%</p><button data-go="Mi suscripción">Ver mi suscripción</button></section>`
+    :`<section class="card"><span class="eyebrow">Membresía</span><h2>Sin suscripción activa</h2><p class="muted small-copy">Contrata una membresía para acceder a los beneficios disponibles.</p><button data-go="Mi suscripción">Ver planes</button></section>`)
+  :'';
+ main.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Tu espacio personal</span><h1>Mi cuenta</h1><p>Mantén tus datos al día y gestiona el acceso a tu cuenta.</p></div></div><div class="account-layout"><article class="profile-card"><span class="profile-avatar" aria-hidden="true">${esc(initials)}</span><h2>${esc(p.nombre)}</h2><span class="badge">${esc(p.rol==='cliente'?'Cliente':p.rol==='personal'?'Profesional':'Administración')}</span>${p.rol==='cliente'?`<div class="profile-points"><span>Mis puntos</span><strong>${esc(p.puntos??0)}</strong><button class="text-link" data-go="Mis puntos">Consultar movimientos →</button></div>`:''}</article><div class="account-panels">${subscriptionCard}<section class="card"><div class="section-title"><h2>Datos de contacto</h2><button id="edit" class="secondary">Editar datos</button></div><dl class="profile-details"><div><dt>Nombre</dt><dd>${esc(p.nombre)}</dd></div><div><dt>Correo electrónico</dt><dd>${esc(p.email||'No registrado')}</dd></div><div><dt>Teléfono</dt><dd>${esc(p.telefono||'No registrado')}</dd></div></dl><p class="muted small-copy">Puedes ingresar con tu correo o teléfono registrado.</p></section><section class="card"><span class="eyebrow">Acceso a tu cuenta</span><h2>Contraseña y sesión</h2><p class="muted small-copy">Al cambiar la contraseña tendrás que iniciar sesión nuevamente. Refrescar la página conserva una sesión que todavía está vigente.</p><button id="password" class="secondary">Cambiar contraseña</button></section></div></div>`;
  $('#edit').onclick=()=>{
   modal('Editar mis datos',[field('nombre','Nombre'),{...field('email','Correo electrónico','email'),optional:true},{...field('telefono','Teléfono','tel'),optional:true}],p,async d=>{const updated=await api('/auth/perfil','PATCH',d);user={...user,...updated.data};navigation();say('Tus datos se actualizaron correctamente.');});
   $('#f_nombre').autocomplete='name';$('#f_email').autocomplete='email';$('#f_telefono').autocomplete='tel';
@@ -165,11 +180,12 @@ function loadCart(){if(!user)return;try{const data=JSON.parse(sessionStorage.get
 function saveCart(){if(user)try{sessionStorage.setItem(cartStorageKey(),JSON.stringify(cart));}catch{say('El navegador no permite conservar el carrito al recargar.');}}
 function quetzales(value){return 'Q '+Number(value).toFixed(2);}
 async function saleCatalog(){let result=[],page=1;while(true){const r=await api('/productos?pagina='+page);result.push(...r.data);if(!r.meta||page>=r.meta.paginas)break;page++;}return result;}
-screens.Productos=async()=>{const r=await api('/productos?pagina='+pageNumber);main.innerHTML='<h1>Productos para ti</h1><p>Compras de demostración, sin cobros reales.</p><div class="grid">'+r.data.map(p=>`<article class="card"><span class="badge">${esc(p.categoria)}</span><h2>${esc(p.nombre)}</h2><p>${esc(p.descripcion||'')}</p><p class="price">${quetzales(p.precio)}</p><p>${esc(p.stock)} disponibles</p><button data-add="${p.id}" ${!p.stock?'disabled':''}>${p.stock?'Agregar al carrito':'Agotado'}</button></article>`).join('')+'</div>'+(r.data.length?'':'<p class="empty-state">No hay productos disponibles.</p>');bind('[data-add]',b=>{if(!user){view='Ingresar';say('Inicia sesión como cliente para comprar.');return render();}if(user.rol!=='cliente'){say('Las compras están disponibles para cuentas de cliente.');return;}loadCart();const p=r.data.find(p=>p.id===Number(b.dataset.add));const item=cart.find(x=>x.producto_id===p.id);if((item?.cantidad||0)>=Math.min(p.stock,10000)){say('Ya agregaste las existencias disponibles de este producto.');return;}if(!item&&cart.length>=50){say('El pedido admite hasta 50 productos diferentes.');return;}if(item)item.cantidad++;else cart.push({producto_id:p.id,cantidad:1});saveCart();say('Producto agregado. Puedes revisarlo en Carrito.');});pager(r.meta);};
+function productPriceHtml(p){const d=Number(p.descuento_suscripcion||0);return d>0?`<p class="price"><del>${quetzales(p.precio_original)}</del> ${quetzales(p.precio)}</p><p><span class="badge">-${esc(d)}% por membresía</span></p>`:`<p class="price">${quetzales(p.precio)}</p>`;}
+screens.Productos=async()=>{const r=await api('/productos?pagina='+pageNumber);const memberDiscount=r.data.reduce((m,p)=>Math.max(m,Number(p.descuento_suscripcion||0)),0);main.innerHTML='<h1>Productos para ti</h1><p>'+(memberDiscount?'Tu membresía aplica '+memberDiscount+'% de descuento a los productos mostrados.':'Compras de demostración, sin cobros reales.')+'</p><div class="grid">'+r.data.map(p=>`<article class="card"><span class="badge">${esc(p.categoria)}</span><h2>${esc(p.nombre)}</h2><p>${esc(p.descripcion||'')}</p>${productPriceHtml(p)}<p>${esc(p.stock)} disponibles</p><button data-add="${p.id}" ${!p.stock?'disabled':''}>${p.stock?'Agregar al carrito':'Agotado'}</button></article>`).join('')+'</div>'+(r.data.length?'':'<p class="empty-state">No hay productos disponibles.</p>');bind('[data-add]',b=>{if(!user){view='Ingresar';say('Inicia sesión como cliente para comprar.');return render();}if(user.rol!=='cliente'){say('Las compras están disponibles para cuentas de cliente.');return;}loadCart();const p=r.data.find(p=>p.id===Number(b.dataset.add));const item=cart.find(x=>x.producto_id===p.id);if((item?.cantidad||0)>=Math.min(p.stock,10000)){say('Ya agregaste las existencias disponibles de este producto.');return;}if(!item&&cart.length>=50){say('El pedido admite hasta 50 productos diferentes.');return;}if(item)item.cantidad++;else cart.push({producto_id:p.id,cantidad:1});saveCart();say('Producto agregado. Puedes revisarlo en Carrito.');});pager(r.meta);};
 let checkoutKey=null,checkoutFingerprint=null;
 screens.Carrito=async()=>{loadCart();if(!cart.length){main.innerHTML='<h1>Tu carrito</h1><p class="empty-state">Tu carrito está vacío.</p><button data-go="Productos">Explorar productos</button>';return;}
 const products=await saleCatalog();let total=0,invalid=false;
-const rows=cart.map(item=>{const p=products.find(p=>p.id===item.producto_id);const unavailable=!p||p.stock<item.cantidad;invalid ||= unavailable;const subtotal=p?Math.round(Number(p.precio)*100)*item.cantidad:0;total+=subtotal;return `<article class="card"><h2>${esc(p?.nombre||'Producto no disponible')}</h2><p>${p?quetzales(p.precio)+' por unidad':'Retira este producto para continuar.'}</p><label>Cantidad <input aria-label="Cantidad de ${esc(p?.nombre||item.producto_id)}" data-quantity="${item.producto_id}" type="number" min="1" max="${Math.min(p?.stock||1,10000)}" step="1" value="${item.cantidad}"></label><p>Subtotal: ${quetzales(subtotal/100)}</p>${unavailable?'<p role="alert">Existencias insuficientes o producto no disponible. Ajusta la cantidad o retíralo.</p>':''}<button class="secondary" data-remove="${item.producto_id}">Quitar</button></article>`;}).join('');
+const rows=cart.map(item=>{const p=products.find(p=>p.id===item.producto_id);const unavailable=!p||p.stock<item.cantidad;invalid ||= unavailable;const subtotal=p?Math.round(Number(p.precio)*100)*item.cantidad:0;total+=subtotal;const member=p&&Number(p.descuento_suscripcion||0)>0?` <span class="badge">-${esc(p.descuento_suscripcion)}% membresía</span>`:'';return `<article class="card"><h2>${esc(p?.nombre||'Producto no disponible')}</h2><p>${p?quetzales(p.precio)+' por unidad'+member:'Retira este producto para continuar.'}</p><label>Cantidad <input aria-label="Cantidad de ${esc(p?.nombre||item.producto_id)}" data-quantity="${item.producto_id}" type="number" min="1" max="${Math.min(p?.stock||1,10000)}" step="1" value="${item.cantidad}"></label><p>Subtotal: ${quetzales(subtotal/100)}</p>${unavailable?'<p role="alert">Existencias insuficientes o producto no disponible. Ajusta la cantidad o retíralo.</p>':''}<button class="secondary" data-remove="${item.producto_id}">Quitar</button></article>`;}).join('');
 main.innerHTML='<h1>Tu carrito</h1>'+rows+`<p class="price">Total estimado: ${quetzales(total/100)}</p><p>El servidor valida el precio y las existencias al confirmar. No se realizan cobros.</p><button id="checkout" ${invalid?'disabled':''}>Continuar con el pedido</button>`;
 bind('[data-remove]',b=>{cart=cart.filter(x=>x.producto_id!==Number(b.dataset.remove));saveCart();return render();});
 main.querySelectorAll('[data-quantity]').forEach(input=>input.onchange=()=>{const q=Number(input.value),item=cart.find(x=>x.producto_id===Number(input.dataset.quantity));if(!Number.isInteger(q)||q<1||q>Number(input.max)){input.value=item.cantidad;say('Introduce una cantidad entera dentro de las existencias disponibles.');return;}item.cantidad=q;saveCart();render();});
@@ -202,5 +218,109 @@ screens.Recordatorios=async()=>{const r=await api('/recordatorios');const rows=r
 let clientSearch='';
 screens.Clientes=async()=>{const r=await api('/admin/clientes?pagina='+pageNumber+'&q='+encodeURIComponent(clientSearch));main.innerHTML='<h1>Clientes</h1><form id="clientSearch"><label>Nombre, correo o teléfono<input name="q" maxlength="150" value="'+esc(clientSearch)+'"></label><button>Buscar</button></form>'+table(r.data,[['id','ID'],['nombre','Nombre'],['email','Correo'],['telefono','Teléfono'],['puntos','Puntos'],['activo','Activo']],c=>`<button data-client="${c.id}">Ver citas</button>`);$('#clientSearch').onsubmit=e=>{e.preventDefault();clientSearch=new FormData(e.target).get('q').trim();pageNumber=1;render();};bind('[data-client]',async b=>{const c=r.data.find(c=>c.id===Number(b.dataset.client));let p=1;const load=async()=>{const result=await api('/admin/clientes/'+c.id+'/citas?pagina='+p);$('#modalTitle').textContent='Citas de '+c.nombre;$('#fields').innerHTML=table(result.data,[['id','Cita'],['fecha','Fecha'],['hora','Hora'],['servicio','Servicio'],['estado','Estado']])+`<div class="actions"><button type="button" id="clientPrev" ${p<=1?'disabled':''}>Anterior</button><span>Página ${p}</span><button type="button" id="clientNext" ${p>=result.meta.paginas?'disabled':''}>Siguiente</button></div>`;$('#clientPrev').onclick=()=>action(async()=>{p--;await load();});$('#clientNext').onclick=()=>action(async()=>{p++;await load();});};await load();$('#formError').textContent='';$('#modalForm').onsubmit=e=>e.preventDefault();$('#modalForm [type="submit"]').disabled=true;$('#modalForm [type="submit"]').textContent='Solo consulta';$('#modal').showModal();});pager(r.meta);};
 screens['Movimientos de inventario']=async()=>{const r=await api('/admin/inventario/movimientos?pagina='+pageNumber);main.innerHTML='<h1>Movimientos de inventario</h1><p>Entradas, salidas y reintegros por cancelación de pedidos.</p>'+table(r.data,[['id','ID'],['producto','Producto'],['tipo','Movimiento'],['cantidad','Cantidad'],['motivo','Motivo'],['fecha','Fecha']]);pager(r.meta);};
+
+
+// ============================================================================
+// SUSCRIPCIONES MENSUALES
+// ============================================================================
+function subscriptionPaymentFields(){
+ return [
+  field('metodo_pago','Método de pago','select',[
+   {value:'efectivo',label:'Efectivo'},
+   {value:'tarjeta_simulada',label:'Tarjeta simulada (sin cobro real)'}
+  ]),
+  {...field('tarjeta_ultimos4','Últimos 4 dígitos ficticios'),optional:true}
+ ];
+}
+function normalizeSubscriptionPayment(d){
+ if(d.metodo_pago==='efectivo')d.tarjeta_ultimos4=null;
+ d.clave_operacion='web_'+operationKey();
+ return d;
+}
+function subscriptionBenefitText(p){
+ const items=[];
+ if(Number(p.descuento_servicios||0)>0)items.push(p.descuento_servicios+'% en servicios');
+ if(Number(p.descuento_productos||0)>0)items.push(p.descuento_productos+'% en productos');
+ if(Boolean(p.acumulable_promociones))items.push('Acumulable con promociones');
+ return items.length?items.join(' · '):'Membresía mensual';
+}
+screens['Mi suscripción']=async()=>{
+ const [mine,plans]=await Promise.all([
+  api('/suscripciones/mia'),
+  api('/planes-suscripcion?pagina=1&limite=100')
+ ]);
+ const s=mine.data;
+ if(s&&s.estado==='activa'){
+  main.innerHTML='<div class="page-heading"><div><span class="eyebrow">Membresía</span><h1>Mi suscripción</h1><p>Consulta tu vigencia, beneficios y pagos.</p></div></div>'
+   +'<article class="card"><span class="badge">'+esc(s.estado)+'</span><h2>'+esc(s.plan)+'</h2><p>'+esc(s.plan_descripcion||'')+'</p>'
+   +'<p><strong>Precio mensual:</strong> Q '+esc(s.precio_mensual_contratado)+'</p>'
+   +'<p><strong>Vigente hasta:</strong> '+esc(String(s.fecha_fin).replace('T',' ').slice(0,16))+'</p>'
+   +'<p>'+esc(subscriptionBenefitText({descuento_servicios:s.descuento_servicios_contratado,descuento_productos:s.descuento_productos_contratado,acumulable_promociones:s.acumulable_promociones_contratado}))+'</p>'
+   +(s.renovacion_disponible
+      ?'<p><span class="badge">Renovación disponible</span></p><div class="actions"><button id="renewSubscription">Renovar</button><button id="cancelSubscription" class="secondary">Cancelar</button></div>'
+      :'<p class="muted small-copy">Podrás renovar a partir del '+esc(String(s.renovacion_desde).replace('T',' ').slice(0,16))+', dos días antes del vencimiento.</p><div class="actions"><button id="renewSubscription" disabled>Renovar</button><button id="cancelSubscription" class="secondary">Cancelar</button></div>')+'</article>'
+   +'<section class="card"><h2>Pagos</h2><div id="subscriptionPayments"></div></section>';
+  if(s.renovacion_disponible)$('#renewSubscription').onclick=()=>modal('Renovar suscripción',subscriptionPaymentFields(),{metodo_pago:'efectivo'},async d=>{
+   const r=await api('/suscripciones/'+s.id+'/renovar','POST',normalizeSubscriptionPayment(d));
+   say(r.message);await render();
+  });
+  $('#cancelSubscription').onclick=()=>action(async()=>{
+   if(confirm('¿Cancelar tu suscripción? Los beneficios dejarán de aplicarse inmediatamente.')){
+    const r=await api('/suscripciones/'+s.id+'/cancelar','PATCH',{motivo:'Cancelación solicitada por el cliente'});
+    say(r.message);await render();
+   }
+  });
+  const payments=await api('/suscripciones/mis-pagos?pagina=1&limite=20');
+  $('#subscriptionPayments').innerHTML=table(payments.data,[['fecha_pago','Fecha'],['monto','Monto Q'],['metodo_pago','Método'],['estado','Estado'],['referencia_pago','Referencia']]);
+  return;
+ }
+ const cards=plans.data.map(p=>'<article class="card"><span class="badge">Mensual</span><h2>'+esc(p.nombre)+'</h2><p>'+esc(p.descripcion||'')+'</p><p class="price">Q '+esc(p.precio_mensual)+'</p><p>'+esc(subscriptionBenefitText(p))+'</p><button data-subscribe="'+p.id+'">Suscribirme</button></article>').join('');
+ main.innerHTML='<div class="page-heading"><div><span class="eyebrow">Membresía</span><h1>Mi suscripción</h1><p>'+(s?'Tu última suscripción está '+esc(s.estado)+'. Puedes contratar un plan disponible.':'Elige un plan mensual.')+'</p></div></div><div class="grid">'+(cards||'<p class="empty-state">No hay planes disponibles.</p>')+'</div>';
+ bind('[data-subscribe]',b=>modal('Contratar membresía',subscriptionPaymentFields(),{metodo_pago:'efectivo'},async d=>{
+  const r=await api('/suscripciones','POST',{plan_id:Number(b.dataset.subscribe),...normalizeSubscriptionPayment(d)});
+  say(r.message);
+ }));
+};
+const subscriptionPlanFields=[
+ field('nombre','Nombre'),
+ {...field('descripcion','Descripción'),optional:true},
+ field('precio_mensual','Precio mensual Q'),
+ field('duracion_meses','Duración en meses','number'),
+ field('descuento_servicios','Descuento servicios (%)','number'),
+ field('descuento_productos','Descuento productos (%)','number'),
+ field('acumulable_promociones','Acumulable con promociones','select',[
+  {value:'false',label:'No'},
+  {value:'true',label:'Sí'}
+ ])
+];
+function normalizeSubscriptionPlan(d){
+ d.acumulable_promociones=String(d.acumulable_promociones)==='true';
+ return d;
+}
+screens['Planes suscripción']=async()=>{
+ const r=await api('/admin/planes-suscripcion?pagina='+pageNumber);
+ main.innerHTML='<h1>Planes de suscripción</h1><p>Configura precio, duración y beneficios.</p><button id="newSubscriptionPlan">Nuevo plan</button>'
+  +table(r.data,[['id','ID'],['nombre','Nombre'],['precio_mensual','Precio Q'],['duracion_meses','Meses'],['descuento_servicios','Desc. servicios %'],['descuento_productos','Desc. productos %'],['activo','Activo']],p=>'<button data-plan-edit="'+p.id+'" class="secondary">Editar</button> <button data-plan-active="'+p.id+'" data-value="'+(!p.activo)+'">'+(p.activo?'Desactivar':'Activar')+'</button>');
+ $('#newSubscriptionPlan').onclick=()=>modal('Nuevo plan',subscriptionPlanFields,{precio_mensual:'100.00',duracion_meses:1,descuento_servicios:0,descuento_productos:0,acumulable_promociones:'false'},d=>api('/admin/planes-suscripcion','POST',normalizeSubscriptionPlan(d)));
+ bind('[data-plan-edit]',b=>{
+  const p=r.data.find(x=>x.id===Number(b.dataset.planEdit));
+  modal('Editar plan',subscriptionPlanFields,{...p,acumulable_promociones:String(Boolean(p.acumulable_promociones))},d=>api('/admin/planes-suscripcion/'+b.dataset.planEdit,'PUT',normalizeSubscriptionPlan(d)));
+ });
+ bind('[data-plan-active]',async b=>{await api('/admin/planes-suscripcion/'+b.dataset.planActive+'/estado','PATCH',{activo:b.dataset.value==='true'});await render();});
+ pager(r.meta);
+};
+screens['Suscripciones admin']=async()=>{
+ const r=await api('/admin/suscripciones?pagina='+pageNumber);
+ main.innerHTML='<h1>Suscripciones</h1><p>Historial y vigencia de membresías.</p><button id="expireSubscriptions" class="secondary">Actualizar vencidas</button>'
+  +table(r.data,[['suscripcion_id','ID'],['cliente','Cliente'],['plan','Plan'],['fecha_inicio','Inicio'],['fecha_fin','Fin'],['estado_efectivo','Estado'],['precio_mensual_contratado','Precio Q']]);
+ $('#expireSubscriptions').onclick=()=>action(async()=>{const x=await api('/admin/suscripciones/marcar-vencidas','POST');say('Suscripciones actualizadas: '+x.data.suscripciones_actualizadas);await render();});
+ pager(r.meta);
+};
+screens['Pagos suscripción']=async()=>{
+ const r=await api('/admin/pagos-suscripcion?pagina='+pageNumber);
+ main.innerHTML='<h1>Pagos de suscripción</h1><p>Son pagos demostrativos; no se realizan cargos bancarios reales.</p>'
+  +table(r.data,[['id','ID'],['cliente','Cliente'],['suscripcion_id','Suscripción'],['periodo_inicio','Desde'],['periodo_fin','Hasta'],['monto','Monto Q'],['metodo_pago','Método'],['estado','Estado'],['referencia_pago','Referencia']]);
+ pager(r.meta);
+};
 
 start();
