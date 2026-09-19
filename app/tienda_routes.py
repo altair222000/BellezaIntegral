@@ -3,14 +3,29 @@ import hashlib
 import json
 import re
 from flask import Blueprint, g, request
+from flask_jwt_extended import get_jwt_identity, verify_jwt_in_request
 from sqlalchemy import text
 from .permisos import requiere_roles
+from .auth_service import consultar_perfil
+from .suscripciones_service import descuento_productos_activo, precio_con_descuento
 from .db_context import cambio_stock_controlado
 from .api_common import (ApiError, actor, body, boolean, clean, endpoint, engine,
                          integer, key, money, page, query, response, string)
 
 tienda=Blueprint('tienda',__name__,url_prefix='/api/v1')
 PRODUCT_FIELDS={'nombre','descripcion','categoria','tipo','precio','imagen'}
+
+
+def cliente_id_opcional():
+    """Identifica un cliente si la solicitud incluye JWT; el catálogo sigue público."""
+    verify_jwt_in_request(optional=True)
+    identidad = get_jwt_identity()
+    if not identidad:
+        return None
+    perfil = consultar_perfil(engine(), identidad)
+    if not perfil or perfil["rol"] != "cliente":
+        return None
+    return perfil["id"]
 
 
 def validar_producto(d):
@@ -25,8 +40,36 @@ def validar_producto(d):
 @endpoint
 def catalogo_productos():
     query()
+    usuario_id = cliente_id_opcional()
     with engine().connect() as c:
-        return page(c,"SELECT id,nombre,descripcion,categoria,precio,stock,imagen FROM productos WHERE activo=1 AND tipo='venta' ORDER BY nombre,id")
+        descuento = (
+            descuento_productos_activo(c, usuario_id)
+            if usuario_id
+            else 0
+        )
+        return page(
+            c,
+            """
+            SELECT
+                id,
+                nombre,
+                descripcion,
+                categoria,
+                precio AS precio_original,
+                ROUND(
+                    precio * (100 - :descuento) / 100,
+                    2
+                ) AS precio,
+                :descuento AS descuento_suscripcion,
+                stock,
+                imagen
+            FROM productos
+            WHERE activo=1
+              AND tipo='venta'
+            ORDER BY nombre,id
+            """,
+            {"descuento": descuento},
+        )
 
 
 @tienda.get('/admin/productos')
@@ -146,6 +189,7 @@ def crear_pedido():
     fingerprint=hashlib.sha256(json.dumps(d,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
     with engine().begin() as c:
         u=actor(c,{'cliente'})
+        descuento_suscripcion=descuento_productos_activo(c,u['id'],bloquear=True)
         old=c.execute(text('SELECT id,solicitud_hash FROM pedidos WHERE usuario_id=:id AND clave_operacion=:clave'),{'id':u['id'],'clave':d['clave_operacion']}).mappings().first()
         if old:
             if old['solicitud_hash']!=fingerprint:raise ApiError('La clave_operacion ya se usó para otro contenido.',409)
@@ -156,16 +200,18 @@ def crear_pedido():
             if not p or not p['activo'] or p['tipo']!='venta':raise ApiError('Producto no disponible.',409)
             q=quantities[id]
             if p['stock']<q:raise ApiError('Existencias insuficientes para '+p['nombre'],409)
-            total+=p['precio']*q;rows.append((p,q))
+            precio_final=precio_con_descuento(p['precio'],descuento_suscripcion)
+            total+=precio_final*q;rows.append((p,q,precio_final))
         if total>99999999.99:raise ApiError('El total excede el límite permitido.')
         id=c.execute(text('''INSERT INTO pedidos(usuario_id,total,nombre_entrega,telefono_entrega,direccion_entrega,metodo_pago,tarjeta_ultimos4,clave_operacion,solicitud_hash)
             VALUES(:usuario_id,:total,:nombre_entrega,:telefono_entrega,:direccion_entrega,:metodo_pago,:tarjeta_ultimos4,:clave_operacion,:solicitud_hash)'''),{**d,'usuario_id':u['id'],'total':total,'solicitud_hash':fingerprint}).lastrowid
         with cambio_stock_controlado(c):
-            for p,q in rows:
-                c.execute(text('INSERT INTO pedido_detalle(pedido_id,producto_id,cantidad,precio_unitario) VALUES(:pedido,:producto,:q,:precio)'),{'pedido':id,'producto':p['id'],'q':q,'precio':p['precio']})
+            for p,q,precio_final in rows:
+                c.execute(text('INSERT INTO pedido_detalle(pedido_id,producto_id,cantidad,precio_unitario) VALUES(:pedido,:producto,:q,:precio)'),{'pedido':id,'producto':p['id'],'q':q,'precio':precio_final})
                 c.execute(text('UPDATE productos SET stock=stock-:q WHERE id=:id'),{'q':q,'id':p['id']})
                 c.execute(text("INSERT INTO movimientos_inventario(producto_id,usuario_id,tipo,cantidad,motivo) VALUES(:p,:u,'salida',:q,:motivo)"),{'p':p['id'],'u':u['id'],'q':q,'motivo':f'Pedido {id} de demostración'})
         result=pedido_json(c,id)
+        result['descuento_suscripcion']=descuento_suscripcion
     return response(result,status=201,message='Pedido de demostración registrado; no se realizó ningún cobro')
 
 

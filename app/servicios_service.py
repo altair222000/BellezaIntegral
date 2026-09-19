@@ -3,6 +3,11 @@ from decimal import Decimal
 
 from sqlalchemy import text
 
+from .suscripciones_service import (
+    descuento_servicios_activo,
+    precio_con_descuento,
+)
+
 
 def validar_servicio(datos):
     if not isinstance(datos, dict):
@@ -119,7 +124,7 @@ def crear_servicio(motor, datos):
     }
 
 
-def listar_servicios(motor, pagina, limite):
+def listar_servicios(motor, pagina, limite, usuario_id=None):
     desplazamiento = (pagina - 1) * limite
 
     consulta = text("""
@@ -132,6 +137,10 @@ def listar_servicios(motor, pagina, limite):
     """)
 
     with motor.connect() as conexion:
+        descuento = descuento_servicios_activo(
+            conexion,
+            usuario_id,
+        )
         filas = conexion.execute(
             consulta,
             {
@@ -144,7 +153,17 @@ def listar_servicios(motor, pagina, limite):
 
     for fila in filas:
         servicio = dict(fila)
-        servicio["precio"] = format(servicio["precio"], ".2f")
+        precio_original = servicio["precio"]
+        precio_final = precio_con_descuento(
+            precio_original,
+            descuento,
+        )
+        servicio["precio_original"] = format(
+            precio_original,
+            ".2f",
+        )
+        servicio["precio"] = format(precio_final, ".2f")
+        servicio["descuento_suscripcion"] = descuento
         servicio["activo"] = bool(servicio["activo"])
         servicios.append(servicio)
 
