@@ -43,7 +43,7 @@ async function action(fn){try{await fn();}catch(e){if(e.name!=='AbortError')say(
 function go(next){view=next;pageNumber=1;say('');render();}
 function navigation(){
  const primary=['Inicio','Servicios','Productos','Promociones',...(!user?['Registrarme']:[])];
- const workspace=user?['Mi cuenta',...(user.rol==='cliente'?['Mis citas','Recordatorios','Carrito','Mis pedidos','Mis puntos']:user.rol==='personal'?['Mi agenda','Recordatorios']:['Usuarios','Clientes','Citas admin','Servicios admin','Horarios','Inventario','Movimientos de inventario','Pedidos admin','Promociones admin','Puntos admin','Reportes'])]:['Ingresar','Registrarme'];
+ const workspace=user?['Mi cuenta',...(user.rol==='cliente'?['Mis citas','Recordatorios','Carrito','Mis pedidos','Mis puntos','Mi suscripción']:user.rol==='personal'?['Mi agenda','Recordatorios']:['Usuarios','Clientes','Citas admin','Servicios admin','Horarios','Inventario','Movimientos de inventario','Pedidos admin','Promociones admin','Puntos admin','Planes suscripción','Suscripciones admin','Pagos suscripción','Reportes'])]:['Ingresar','Registrarme'];
  const buttons=items=>items.map(i=>`<button type="button" data-view="${esc(i)}" class="${view===i?'selected':''}" ${view===i?'aria-current="page"':''}>${esc(i)}</button>`).join('');
  $('#nav').innerHTML='<div class="primary-nav">'+buttons(primary)+'</div>'+(user?'<div class="workspace-nav"><span class="workspace-label">Tu espacio</span>'+buttons(workspace)+'</div>':'');
  $('#nav').classList.remove('open');$('#menuToggle').setAttribute('aria-expanded','false');
@@ -202,5 +202,107 @@ screens.Recordatorios=async()=>{const r=await api('/recordatorios');const rows=r
 let clientSearch='';
 screens.Clientes=async()=>{const r=await api('/admin/clientes?pagina='+pageNumber+'&q='+encodeURIComponent(clientSearch));main.innerHTML='<h1>Clientes</h1><form id="clientSearch"><label>Nombre, correo o teléfono<input name="q" maxlength="150" value="'+esc(clientSearch)+'"></label><button>Buscar</button></form>'+table(r.data,[['id','ID'],['nombre','Nombre'],['email','Correo'],['telefono','Teléfono'],['puntos','Puntos'],['activo','Activo']],c=>`<button data-client="${c.id}">Ver citas</button>`);$('#clientSearch').onsubmit=e=>{e.preventDefault();clientSearch=new FormData(e.target).get('q').trim();pageNumber=1;render();};bind('[data-client]',async b=>{const c=r.data.find(c=>c.id===Number(b.dataset.client));let p=1;const load=async()=>{const result=await api('/admin/clientes/'+c.id+'/citas?pagina='+p);$('#modalTitle').textContent='Citas de '+c.nombre;$('#fields').innerHTML=table(result.data,[['id','Cita'],['fecha','Fecha'],['hora','Hora'],['servicio','Servicio'],['estado','Estado']])+`<div class="actions"><button type="button" id="clientPrev" ${p<=1?'disabled':''}>Anterior</button><span>Página ${p}</span><button type="button" id="clientNext" ${p>=result.meta.paginas?'disabled':''}>Siguiente</button></div>`;$('#clientPrev').onclick=()=>action(async()=>{p--;await load();});$('#clientNext').onclick=()=>action(async()=>{p++;await load();});};await load();$('#formError').textContent='';$('#modalForm').onsubmit=e=>e.preventDefault();$('#modalForm [type="submit"]').disabled=true;$('#modalForm [type="submit"]').textContent='Solo consulta';$('#modal').showModal();});pager(r.meta);};
 screens['Movimientos de inventario']=async()=>{const r=await api('/admin/inventario/movimientos?pagina='+pageNumber);main.innerHTML='<h1>Movimientos de inventario</h1><p>Entradas, salidas y reintegros por cancelación de pedidos.</p>'+table(r.data,[['id','ID'],['producto','Producto'],['tipo','Movimiento'],['cantidad','Cantidad'],['motivo','Motivo'],['fecha','Fecha']]);pager(r.meta);};
+
+
+// ============================================================================
+// SUSCRIPCIONES MENSUALES
+// ============================================================================
+function subscriptionPaymentFields(){
+ return [
+  field('metodo_pago','Método de pago','select',[
+   {value:'efectivo',label:'Efectivo'},
+   {value:'tarjeta_simulada',label:'Tarjeta simulada (sin cobro real)'}
+  ]),
+  {...field('tarjeta_ultimos4','Últimos 4 dígitos ficticios'),optional:true}
+ ];
+}
+function normalizeSubscriptionPayment(d){
+ if(d.metodo_pago==='efectivo')d.tarjeta_ultimos4=null;
+ d.clave_operacion='web_'+operationKey();
+ return d;
+}
+function subscriptionBenefitText(p){
+ const items=[];
+ if(Number(p.descuento_servicios||0)>0)items.push(p.descuento_servicios+'% en servicios');
+ if(Number(p.descuento_productos||0)>0)items.push(p.descuento_productos+'% en productos');
+ if(Boolean(p.acumulable_promociones))items.push('Acumulable con promociones');
+ return items.length?items.join(' · '):'Membresía mensual';
+}
+screens['Mi suscripción']=async()=>{
+ const [mine,plans]=await Promise.all([
+  api('/suscripciones/mia'),
+  api('/planes-suscripcion?pagina=1&limite=100')
+ ]);
+ const s=mine.data;
+ if(s&&s.estado==='activa'){
+  main.innerHTML='<div class="page-heading"><div><span class="eyebrow">Membresía</span><h1>Mi suscripción</h1><p>Consulta tu vigencia, beneficios y pagos.</p></div></div>'
+   +'<article class="card"><span class="badge">'+esc(s.estado)+'</span><h2>'+esc(s.plan)+'</h2><p>'+esc(s.plan_descripcion||'')+'</p>'
+   +'<p><strong>Precio mensual:</strong> Q '+esc(s.precio_mensual_contratado)+'</p>'
+   +'<p><strong>Vigente hasta:</strong> '+esc(String(s.fecha_fin).replace('T',' ').slice(0,16))+'</p>'
+   +'<p>'+esc(subscriptionBenefitText({descuento_servicios:s.descuento_servicios_contratado,descuento_productos:s.descuento_productos_contratado,acumulable_promociones:s.acumulable_promociones_contratado}))+'</p>'
+   +'<div class="actions"><button id="renewSubscription">Renovar</button><button id="cancelSubscription" class="secondary">Cancelar</button></div></article>'
+   +'<section class="card"><h2>Pagos</h2><div id="subscriptionPayments"></div></section>';
+  $('#renewSubscription').onclick=()=>modal('Renovar suscripción',subscriptionPaymentFields(),{metodo_pago:'efectivo'},async d=>{
+   const r=await api('/suscripciones/'+s.id+'/renovar','POST',normalizeSubscriptionPayment(d));
+   say(r.message);
+  });
+  $('#cancelSubscription').onclick=()=>action(async()=>{
+   if(confirm('¿Cancelar tu suscripción? Los beneficios dejarán de aplicarse inmediatamente.')){
+    const r=await api('/suscripciones/'+s.id+'/cancelar','PATCH',{motivo:'Cancelación solicitada por el cliente'});
+    say(r.message);await render();
+   }
+  });
+  const payments=await api('/suscripciones/mis-pagos?pagina=1&limite=20');
+  $('#subscriptionPayments').innerHTML=table(payments.data,[['fecha_pago','Fecha'],['monto','Monto Q'],['metodo_pago','Método'],['estado','Estado'],['referencia_pago','Referencia']]);
+  return;
+ }
+ const cards=plans.data.map(p=>'<article class="card"><span class="badge">Mensual</span><h2>'+esc(p.nombre)+'</h2><p>'+esc(p.descripcion||'')+'</p><p class="price">Q '+esc(p.precio_mensual)+'</p><p>'+esc(subscriptionBenefitText(p))+'</p><button data-subscribe="'+p.id+'">Suscribirme</button></article>').join('');
+ main.innerHTML='<div class="page-heading"><div><span class="eyebrow">Membresía</span><h1>Mi suscripción</h1><p>'+(s?'Tu última suscripción está '+esc(s.estado)+'. Puedes contratar un plan disponible.':'Elige un plan mensual.')+'</p></div></div><div class="grid">'+(cards||'<p class="empty-state">No hay planes disponibles.</p>')+'</div>';
+ bind('[data-subscribe]',b=>modal('Contratar membresía',subscriptionPaymentFields(),{metodo_pago:'efectivo'},async d=>{
+  const r=await api('/suscripciones','POST',{plan_id:Number(b.dataset.subscribe),...normalizeSubscriptionPayment(d)});
+  say(r.message);
+ }));
+};
+const subscriptionPlanFields=[
+ field('nombre','Nombre'),
+ {...field('descripcion','Descripción'),optional:true},
+ field('precio_mensual','Precio mensual Q'),
+ field('duracion_meses','Duración en meses','number'),
+ field('descuento_servicios','Descuento servicios (%)','number'),
+ field('descuento_productos','Descuento productos (%)','number'),
+ field('acumulable_promociones','Acumulable con promociones','select',[
+  {value:'false',label:'No'},
+  {value:'true',label:'Sí'}
+ ])
+];
+function normalizeSubscriptionPlan(d){
+ d.acumulable_promociones=String(d.acumulable_promociones)==='true';
+ return d;
+}
+screens['Planes suscripción']=async()=>{
+ const r=await api('/admin/planes-suscripcion?pagina='+pageNumber);
+ main.innerHTML='<h1>Planes de suscripción</h1><p>Configura precio, duración y beneficios.</p><button id="newSubscriptionPlan">Nuevo plan</button>'
+  +table(r.data,[['id','ID'],['nombre','Nombre'],['precio_mensual','Precio Q'],['duracion_meses','Meses'],['descuento_servicios','Desc. servicios %'],['descuento_productos','Desc. productos %'],['activo','Activo']],p=>'<button data-plan-edit="'+p.id+'" class="secondary">Editar</button> <button data-plan-active="'+p.id+'" data-value="'+(!p.activo)+'">'+(p.activo?'Desactivar':'Activar')+'</button>');
+ $('#newSubscriptionPlan').onclick=()=>modal('Nuevo plan',subscriptionPlanFields,{precio_mensual:'100.00',duracion_meses:1,descuento_servicios:0,descuento_productos:0,acumulable_promociones:'false'},d=>api('/admin/planes-suscripcion','POST',normalizeSubscriptionPlan(d)));
+ bind('[data-plan-edit]',b=>{
+  const p=r.data.find(x=>x.id===Number(b.dataset.planEdit));
+  modal('Editar plan',subscriptionPlanFields,{...p,acumulable_promociones:String(Boolean(p.acumulable_promociones))},d=>api('/admin/planes-suscripcion/'+b.dataset.planEdit,'PUT',normalizeSubscriptionPlan(d)));
+ });
+ bind('[data-plan-active]',async b=>{await api('/admin/planes-suscripcion/'+b.dataset.planActive+'/estado','PATCH',{activo:b.dataset.value==='true'});await render();});
+ pager(r.meta);
+};
+screens['Suscripciones admin']=async()=>{
+ const r=await api('/admin/suscripciones?pagina='+pageNumber);
+ main.innerHTML='<h1>Suscripciones</h1><p>Historial y vigencia de membresías.</p><button id="expireSubscriptions" class="secondary">Actualizar vencidas</button>'
+  +table(r.data,[['suscripcion_id','ID'],['cliente','Cliente'],['plan','Plan'],['fecha_inicio','Inicio'],['fecha_fin','Fin'],['estado_efectivo','Estado'],['precio_mensual_contratado','Precio Q']]);
+ $('#expireSubscriptions').onclick=()=>action(async()=>{const x=await api('/admin/suscripciones/marcar-vencidas','POST');say('Suscripciones actualizadas: '+x.data.suscripciones_actualizadas);await render();});
+ pager(r.meta);
+};
+screens['Pagos suscripción']=async()=>{
+ const r=await api('/admin/pagos-suscripcion?pagina='+pageNumber);
+ main.innerHTML='<h1>Pagos de suscripción</h1><p>Son pagos demostrativos; no se realizan cargos bancarios reales.</p>'
+  +table(r.data,[['id','ID'],['cliente','Cliente'],['suscripcion_id','Suscripción'],['periodo_inicio','Desde'],['periodo_fin','Hasta'],['monto','Monto Q'],['metodo_pago','Método'],['estado','Estado'],['referencia_pago','Referencia']]);
+ pager(r.meta);
+};
 
 start();
