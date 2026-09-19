@@ -68,8 +68,16 @@ def subscription_json(c, subscription_id, owner=None):
     row = c.execute(
         text(
             """
-            SELECT *
-            FROM vw_suscripciones_detalle
+            SELECT
+                d.*,
+                DATE_SUB(d.fecha_fin, INTERVAL 2 DAY) AS renovacion_desde,
+                CASE
+                    WHEN d.estado_efectivo='activa'
+                     AND d.fecha_fin<=DATE_ADD(NOW(), INTERVAL 2 DAY)
+                    THEN 1
+                    ELSE 0
+                END AS renovacion_disponible
+            FROM vw_suscripciones_detalle d
             WHERE suscripcion_id=:id
             """
             + owner_sql
@@ -91,6 +99,9 @@ def subscription_json(c, subscription_id, owner=None):
 
     result["acumulable_promociones_contratado"] = bool(
         result["acumulable_promociones_contratado"]
+    )
+    result["renovacion_disponible"] = bool(
+        result["renovacion_disponible"]
     )
     return result
 
@@ -548,6 +559,33 @@ def renew(subscription_id):
             raise ApiError(
                 "La suscripción no puede renovarse en su estado actual.", 409
             )
+
+        if sub["estado"] == "activa":
+            puede_renovar = c.execute(
+                text(
+                    """
+                    SELECT :fecha_fin<=DATE_ADD(NOW(), INTERVAL 2 DAY)
+                    """
+                ),
+                {"fecha_fin": sub["fecha_fin"]},
+            ).scalar_one()
+
+            if not puede_renovar:
+                renovacion_desde = c.execute(
+                    text(
+                        """
+                        SELECT DATE_SUB(:fecha_fin, INTERVAL 2 DAY)
+                        """
+                    ),
+                    {"fecha_fin": sub["fecha_fin"]},
+                ).scalar_one()
+
+                raise ApiError(
+                    "La renovación estará disponible a partir de "
+                    + renovacion_desde.strftime("%d/%m/%Y %H:%M")
+                    + ", dos días antes del vencimiento.",
+                    409,
+                )
 
         plan_active = c.execute(
             text("SELECT activo FROM planes_suscripcion WHERE id=:id"),

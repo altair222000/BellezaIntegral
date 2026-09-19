@@ -107,6 +107,18 @@ def test_renew_extends_end_date(client, headers, motor):
         expected=201,
     )["data"]
 
+    with motor.begin() as c:
+        c.execute(
+            text(
+                """
+                UPDATE suscripciones
+                SET fecha_fin=DATE_ADD(NOW(), INTERVAL 1 DAY)
+                WHERE id=:id
+                """
+            ),
+            {"id": sub["id"]},
+        )
+
     with motor.connect() as c:
         before = c.execute(
             text("SELECT fecha_fin FROM suscripciones WHERE id=:id"),
@@ -326,3 +338,77 @@ def test_mi_suscripcion_expone_estado_efectivo_como_estado(
     assert mia["data"]["estado"] == "activa"
     assert mia["data"]["estado_efectivo"] == "activa"
     assert mia["data"]["estado_registrado"] == "activa"
+
+
+def test_renew_only_within_two_days_of_expiry(
+    client,
+    headers,
+    motor,
+):
+    plan_id = create_plan(client, headers)
+    sub = call(
+        client,
+        headers,
+        "/suscripciones",
+        "POST",
+        {
+            "plan_id": plan_id,
+            "metodo_pago": "efectivo",
+            "clave_operacion": "suscripcion_ventana_0001",
+        },
+        id=2,
+        expected=201,
+    )["data"]
+
+    # Recién creada: falta casi un mes, por lo que no debe renovar.
+    early = client.post(
+        f"/api/v1/suscripciones/{sub['id']}/renovar",
+        headers=headers(2),
+        json={
+            "metodo_pago": "efectivo",
+            "clave_operacion": "suscripcion_ventana_0002",
+        },
+    )
+    assert early.status_code == 409
+    assert "dos días antes" in early.get_json()["message"]
+
+    # Entrar en la ventana de renovación.
+    with motor.begin() as c:
+        c.execute(
+            text(
+                """
+                UPDATE suscripciones
+                SET fecha_fin=DATE_ADD(NOW(), INTERVAL 2 DAY)
+                WHERE id=:id
+                """
+            ),
+            {"id": sub["id"]},
+        )
+
+    mine = call(client, headers, "/suscripciones/mia", id=2)
+    assert mine["data"]["renovacion_disponible"] is True
+
+    renewed = call(
+        client,
+        headers,
+        f"/suscripciones/{sub['id']}/renovar",
+        "POST",
+        {
+            "metodo_pago": "efectivo",
+            "clave_operacion": "suscripcion_ventana_0003",
+        },
+        id=2,
+        expected=201,
+    )
+    assert renewed["data"]["renovacion_disponible"] is False
+
+    # La nueva vigencia vuelve a quedar fuera de la ventana.
+    again = client.post(
+        f"/api/v1/suscripciones/{sub['id']}/renovar",
+        headers=headers(2),
+        json={
+            "metodo_pago": "efectivo",
+            "clave_operacion": "suscripcion_ventana_0004",
+        },
+    )
+    assert again.status_code == 409

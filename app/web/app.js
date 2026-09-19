@@ -248,11 +248,13 @@ screens['Mi suscripción']=async()=>{
    +'<p><strong>Precio mensual:</strong> Q '+esc(s.precio_mensual_contratado)+'</p>'
    +'<p><strong>Vigente hasta:</strong> '+esc(String(s.fecha_fin).replace('T',' ').slice(0,16))+'</p>'
    +'<p>'+esc(subscriptionBenefitText({descuento_servicios:s.descuento_servicios_contratado,descuento_productos:s.descuento_productos_contratado,acumulable_promociones:s.acumulable_promociones_contratado}))+'</p>'
-   +'<div class="actions"><button id="renewSubscription">Renovar</button><button id="cancelSubscription" class="secondary">Cancelar</button></div></article>'
+   +(s.renovacion_disponible
+      ?'<p><span class="badge">Renovación disponible</span></p><div class="actions"><button id="renewSubscription">Renovar</button><button id="cancelSubscription" class="secondary">Cancelar</button></div>'
+      :'<p class="muted small-copy">Podrás renovar a partir del '+esc(String(s.renovacion_desde).replace('T',' ').slice(0,16))+', dos días antes del vencimiento.</p><div class="actions"><button id="renewSubscription" disabled>Renovar</button><button id="cancelSubscription" class="secondary">Cancelar</button></div>')+'</article>'
    +'<section class="card"><h2>Pagos</h2><div id="subscriptionPayments"></div></section>';
-  $('#renewSubscription').onclick=()=>modal('Renovar suscripción',subscriptionPaymentFields(),{metodo_pago:'efectivo'},async d=>{
+  if(s.renovacion_disponible)$('#renewSubscription').onclick=()=>modal('Renovar suscripción',subscriptionPaymentFields(),{metodo_pago:'efectivo'},async d=>{
    const r=await api('/suscripciones/'+s.id+'/renovar','POST',normalizeSubscriptionPayment(d));
-   say(r.message);
+   say(r.message);await render();
   });
   $('#cancelSubscription').onclick=()=>action(async()=>{
    if(confirm('¿Cancelar tu suscripción? Los beneficios dejarán de aplicarse inmediatamente.')){

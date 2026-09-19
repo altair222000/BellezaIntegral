@@ -185,3 +185,27 @@ El checkout no confía en el precio mostrado por JavaScript. Al crear
 `POST /api/v1/pedidos`, el backend vuelve a consultar la membresía activa,
 recalcula el precio y guarda el valor descontado en
 `pedido_detalle.precio_unitario`.
+
+
+## Ventana de renovación
+
+Una suscripción activa solamente puede renovarse durante los **2 días previos a
+su fecha de vencimiento**.
+
+Ejemplo:
+
+    fecha_fin:       30/10/2026 18:00
+    renovacion_desde: 28/10/2026 18:00
+
+Antes de `renovacion_desde`, el endpoint de renovación responde HTTP 409 y no
+crea ningún pago.
+
+`GET /api/v1/suscripciones/mia` devuelve además:
+
+    renovacion_desde
+    renovacion_disponible
+
+La pantalla "Mi suscripción" mantiene el botón Renovar deshabilitado hasta
+entrar en esa ventana. Después de renovar, la nueva fecha de vencimiento se
+extiende por la duración contratada y la siguiente renovación vuelve a quedar
+bloqueada hasta los 2 días previos al nuevo vencimiento.
