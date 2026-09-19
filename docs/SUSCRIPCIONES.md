@@ -152,3 +152,36 @@ La contraseña se solicita interactivamente. No se recomienda usar
 El usuario debe poder crear tablas, vistas y triggers, además de ejecutar
 INSERT/UPDATE/SELECT sobre la base de Belleza Integral. El script no intenta
 crear ni seleccionar otra base con CREATE DATABASE/USE.
+
+
+## Mi cuenta
+
+Para clientes, la pantalla **Mi cuenta** consulta también
+`GET /api/v1/suscripciones/mia`.
+
+Si existe una membresía activa muestra:
+
+- nombre del plan;
+- estado activo;
+- fecha de vencimiento;
+- descuento de productos;
+- descuento de servicios;
+- acceso directo a "Mi suscripción".
+
+Si no existe una membresía activa muestra un acceso para consultar los planes.
+
+## Descuento de productos
+
+`GET /api/v1/productos` continúa siendo público. Cuando la solicitud lleva un
+JWT válido de cliente con membresía activa, cada producto incluye:
+
+    precio_original
+    precio
+    descuento_suscripcion
+
+El campo `precio` es el precio final después del descuento.
+
+El checkout no confía en el precio mostrado por JavaScript. Al crear
+`POST /api/v1/pedidos`, el backend vuelve a consultar la membresía activa,
+recalcula el precio y guarda el valor descontado en
+`pedido_detalle.precio_unitario`.

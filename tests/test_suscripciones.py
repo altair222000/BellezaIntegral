@@ -169,3 +169,126 @@ def test_health_subscriptions(client):
     assert data["tablas"] == 3
     assert data["vistas"] == 2
     assert data["triggers"] >= 9
+
+
+def test_product_discount_is_shown_and_applied_to_order(
+    client,
+    headers,
+):
+    plan_id = create_plan(client, headers)
+
+    subscription = call(
+        client,
+        headers,
+        "/suscripciones",
+        "POST",
+        {
+            "plan_id": plan_id,
+            "metodo_pago": "efectivo",
+            "clave_operacion": "suscripcion_descuento_0001",
+        },
+        id=2,
+        expected=201,
+    )["data"]
+
+    product_id = call(
+        client,
+        headers,
+        "/admin/productos",
+        "POST",
+        {
+            "nombre": "Producto membresía",
+            "categoria": "Belleza",
+            "tipo": "venta",
+            "precio": "20.00",
+        },
+        id=1,
+        expected=201,
+    )["data"]["id"]
+
+    call(
+        client,
+        headers,
+        "/admin/inventario/movimientos",
+        "POST",
+        {
+            "producto_id": product_id,
+            "tipo": "entrada",
+            "cantidad": 5,
+            "motivo": "Prueba descuento membresía",
+        },
+        id=1,
+        expected=201,
+    )
+
+    catalog = call(
+        client,
+        headers,
+        "/productos?pagina=1&limite=20",
+        id=2,
+    )
+    product = next(
+        p for p in catalog["data"]
+        if p["id"] == product_id
+    )
+
+    assert product["precio_original"] == "20.00"
+    assert product["precio"] == "19.00"
+    assert product["descuento_suscripcion"] == 5
+
+    order = call(
+        client,
+        headers,
+        "/pedidos",
+        "POST",
+        {
+            "items": [
+                {
+                    "producto_id": product_id,
+                    "cantidad": 2,
+                }
+            ],
+            "nombre_entrega": "Cliente membresía",
+            "telefono_entrega": "55550101",
+            "direccion_entrega": "Dirección prueba",
+            "metodo_pago": "efectivo",
+            "clave_operacion": "pedido_membresia_0001",
+        },
+        id=2,
+        expected=201,
+    )["data"]
+
+    assert order["total"] == "38.00"
+    assert order["descuento_suscripcion"] == 5
+    assert order["detalle"][0]["precio_unitario"] == "19.00"
+    assert subscription["descuento_productos_contratado"] == 5
+
+
+def test_anonymous_product_catalog_keeps_base_price(
+    client,
+    headers,
+):
+    product_id = call(
+        client,
+        headers,
+        "/admin/productos",
+        "POST",
+        {
+            "nombre": "Producto público",
+            "categoria": "Belleza",
+            "tipo": "venta",
+            "precio": "25.00",
+        },
+        id=1,
+        expected=201,
+    )["data"]["id"]
+
+    r = client.get("/api/v1/productos?pagina=1&limite=20")
+    assert r.status_code == 200
+    product = next(
+        p for p in r.get_json()["data"]
+        if p["id"] == product_id
+    )
+    assert product["precio_original"] == "25.00"
+    assert product["precio"] == "25.00"
+    assert product["descuento_suscripcion"] == 0
