@@ -47,7 +47,7 @@ def motor():
 
         from scripts.sql_utils import cargar_sentencias
 
-        archivos = sorted((ROOT / "database").glob("00[1-7]_*.sql"))
+        archivos = sorted((ROOT / "database").glob("00[1-8]_*.sql"))
         for f in archivos:
             for stmt in cargar_sentencias(f):
                 limpio = stmt.lstrip()
@@ -70,7 +70,8 @@ def app(motor):
     with motor.connect() as c:
         c.exec_driver_sql("SET FOREIGN_KEY_CHECKS=0")
         for table in (
-            "auditoria_eventos", "auditoria_cambios", "puntos_historial",
+            "auditoria_eventos", "auditoria_cambios", "pagos_suscripcion",
+            "suscripciones", "planes_suscripcion", "puntos_historial",
             "movimientos_inventario", "pedido_detalle", "pedidos", "promociones",
             "productos", "sesiones_usuario", "tokens_revocados", "citas",
             "disponibilidades", "servicios", "usuarios",

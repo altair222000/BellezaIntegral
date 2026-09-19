@@ -1,7 +1,9 @@
 from flask import Blueprint, current_app, jsonify, request
+from flask_jwt_extended import get_jwt_identity, verify_jwt_in_request
 from sqlalchemy.exc import SQLAlchemyError
 
 from .permisos import requiere_roles
+from .auth_service import consultar_perfil
 from .servicios_service import (
     crear_servicio,
     listar_servicios,
@@ -43,7 +45,20 @@ def consultar_catalogo():
 
     try:
         motor = current_app.extensions["db_engine"]
-        registros = listar_servicios(motor, pagina, limite)
+        verify_jwt_in_request(optional=True)
+        identidad = get_jwt_identity()
+        usuario_id = None
+        if identidad:
+            perfil = consultar_perfil(motor, identidad)
+            if perfil and perfil["rol"] == "cliente":
+                usuario_id = perfil["id"]
+
+        registros = listar_servicios(
+            motor,
+            pagina,
+            limite,
+            usuario_id=usuario_id,
+        )
 
     except SQLAlchemyError:
         current_app.logger.error("Error al consultar servicios.")
