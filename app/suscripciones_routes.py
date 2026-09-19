@@ -82,6 +82,13 @@ def subscription_json(c, subscription_id, owner=None):
 
     result = dict(row)
     result["id"] = result.pop("suscripcion_id")
+
+    # Contrato estable para frontend/cliente:
+    # "estado" representa siempre el estado efectivo de la membresía.
+    # La vista conserva estado_registrado/estado_efectivo para auditoría,
+    # pero las pantallas consumen "estado".
+    result["estado"] = result["estado_efectivo"]
+
     result["acumulable_promociones_contratado"] = bool(
         result["acumulable_promociones_contratado"]
     )

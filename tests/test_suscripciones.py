@@ -292,3 +292,37 @@ def test_anonymous_product_catalog_keeps_base_price(
     assert product["precio_original"] == "25.00"
     assert product["precio"] == "25.00"
     assert product["descuento_suscripcion"] == 0
+
+
+def test_mi_suscripcion_expone_estado_efectivo_como_estado(
+    client,
+    headers,
+):
+    plan_id = create_plan(client, headers)
+
+    alta = call(
+        client,
+        headers,
+        "/suscripciones",
+        "POST",
+        {
+            "plan_id": plan_id,
+            "metodo_pago": "efectivo",
+            "clave_operacion": "suscripcion_estado_0001",
+        },
+        id=2,
+        expected=201,
+    )
+
+    assert alta["data"]["estado"] == "activa"
+
+    mia = call(
+        client,
+        headers,
+        "/suscripciones/mia",
+        id=2,
+    )
+
+    assert mia["data"]["estado"] == "activa"
+    assert mia["data"]["estado_efectivo"] == "activa"
+    assert mia["data"]["estado_registrado"] == "activa"
