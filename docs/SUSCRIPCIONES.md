@@ -93,3 +93,62 @@ El endpoint /suscripciones/beneficios ya expone los porcentajes contratados.
 Esta entrega no modifica todavía el total de pedidos ni el precio de citas.
 Para aplicar descuentos reales debe definirse previamente cómo conviven
 membresía, promociones y canje de puntos.
+
+
+## Instalación en MySQL remoto
+
+La migración remota también está versionada en Git. El archivo SQL continúa
+siendo:
+
+    database/008_suscripciones.sql
+
+Para ejecutarlo contra un hosting MySQL remoto se utiliza:
+
+    scripts/instalar_suscripciones_remoto.py
+
+### Opción recomendada: archivo local de conexión
+
+Copia el ejemplo:
+
+    copy .env.remote.example .env.remote
+
+Edita solamente `.env.remote` con host, puerto, base y usuario. Este archivo
+está excluido de Git.
+
+No es obligatorio guardar la contraseña. Si no defines
+`REMOTE_DB_PASSWORD`, el instalador la solicitará sin mostrarla.
+
+Primero verifica conectividad y prerrequisitos:
+
+    python scripts/instalar_suscripciones_remoto.py --verify
+
+Para aplicar la migración:
+
+    python scripts/instalar_suscripciones_remoto.py --apply
+
+Al finalizar vuelve a verificar automáticamente:
+
+- 3 tablas;
+- 2 vistas;
+- triggers del módulo;
+- plan inicial.
+
+### Opción sin archivo .env.remote
+
+También puedes indicar la conexión en el comando:
+
+    python scripts/instalar_suscripciones_remoto.py ^
+      --host HOST_MYSQL ^
+      --port 3306 ^
+      --database BASE_DATOS ^
+      --user USUARIO ^
+      --apply
+
+La contraseña se solicita interactivamente. No se recomienda usar
+`--password` porque puede quedar almacenada en el historial de comandos.
+
+### Requisitos del usuario MySQL remoto
+
+El usuario debe poder crear tablas, vistas y triggers, además de ejecutar
+INSERT/UPDATE/SELECT sobre la base de Belleza Integral. El script no intenta
+crear ni seleccionar otra base con CREATE DATABASE/USE.
