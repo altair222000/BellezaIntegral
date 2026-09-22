@@ -84,6 +84,7 @@ def motor():
                 if (
                     f.name[:3] in {"001", "002", "003", "004"}
                     and upper.startswith("CREATE TABLE ")
+                    and not upper.startswith("CREATE TABLE IF NOT EXISTS ")
                 ):
                     limpio = (
                         "CREATE TABLE IF NOT EXISTS "
@@ -123,16 +124,14 @@ def motor():
 def app(motor):
     with motor.connect() as c:
         c.exec_driver_sql("SET FOREIGN_KEY_CHECKS=0")
+        presentes = {fila[0] for fila in c.execute(text("SHOW TABLES")).all()}
         for table in (
             "auditoria_eventos", "auditoria_cambios", "puntos_historial",
             "movimientos_inventario", "pedido_detalle", "pedidos", "promociones",
             "productos", "sesiones_usuario", "tokens_revocados", "citas",
             "disponibilidades", "servicios", "usuarios",
         ):
-            existe = c.execute(
-                text("SHOW TABLES LIKE :tabla"), {"tabla": table}
-            ).first()
-            if existe:
+            if table in presentes:
                 c.exec_driver_sql("TRUNCATE TABLE " + table)
         c.exec_driver_sql("SET FOREIGN_KEY_CHECKS=1")
         c.commit()
