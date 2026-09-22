@@ -38,8 +38,15 @@ def verificar(app, identificador, password, destino=None):
                   for regla in app.url_map.iter_rules()
                   if regla.rule.startswith('/api/v1/') and regla.rule != '/api/v1/openapi.json'
                   for m in regla.methods - {'HEAD', 'OPTIONS'}}
-        registrar('Contrato coincide con todas las operaciones de Flask',
-                  r.status_code == 200 and bool(documentadas) and documentadas == reales, r.status_code)
+        coincide = r.status_code == 200 and bool(documentadas) and documentadas == reales
+        registrar('Contrato coincide con todas las operaciones de Flask', coincide, r.status_code)
+        if not coincide:
+            solo_flask = sorted(reales - documentadas)
+            solo_contrato = sorted(documentadas - reales)
+            if solo_flask:
+                print('  Solo Flask: ' + ', '.join(f'{m} {p}' for p, m in solo_flask))
+            if solo_contrato:
+                print('  Solo contrato: ' + ', '.join(f'{m} {p}' for p, m in solo_contrato))
         # Solo rutas protegidas: las solicitudes sin token deben rechazarse antes
         # de procesar cuerpo o tocar registros. No usar credenciales en esta fase.
         for ruta, ops in rutas.items():
