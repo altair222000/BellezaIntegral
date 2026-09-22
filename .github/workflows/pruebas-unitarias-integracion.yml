@@ -1,0 +1,101 @@
+name: Pruebas unitarias e integración MySQL
+
+on:
+  push:
+    branches:
+      - main
+      - "qa/**"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unitarias:
+    name: Pruebas unitarias
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-test.txt
+      - name: Validar sintaxis Python
+        run: python -m compileall -q app scripts tests
+      - name: Ejecutar pruebas unitarias
+        run: |
+          mkdir -p artifacts
+          python -m pytest -q tests/test_unitarios.py --junitxml=artifacts/unitarias.xml
+      - name: Publicar evidencia unitaria
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-unitarios
+          path: artifacts/unitarias.xml
+          if-no-files-found: warn
+
+  integracion_mysql:
+    name: Integración completa con MySQL
+    needs: unitarias
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_DATABASE: belleza_integral_test
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    env:
+      BELLEZA_TEST_DATABASE_URL: mysql+pymysql://root@127.0.0.1:3306/belleza_integral_test?charset=utf8mb4
+      PYTHONPATH: .
+      CI: "true"
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-test.txt
+      - name: Verificar base de datos efímera
+        run: |
+          python - <<'PY'
+          import os
+          from sqlalchemy import create_engine, text
+          engine = create_engine(os.environ["BELLEZA_TEST_DATABASE_URL"])
+          with engine.connect() as conn:
+              assert conn.execute(text("SELECT DATABASE()")).scalar_one() == "belleza_integral_test"
+          engine.dispose()
+          PY
+      - name: Crear tablas, cargar datos coherentes y ejecutar toda la suite
+        run: |
+          mkdir -p artifacts
+          python -m pytest -q tests --junitxml=artifacts/integracion.xml
+      - name: Publicar evidencia de integración
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-integracion-mysql
+          path: artifacts/integracion.xml
+          if-no-files-found: warn
