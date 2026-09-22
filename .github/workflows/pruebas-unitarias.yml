@@ -1,0 +1,132 @@
+name: Pruebas unitarias e integridad
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas:
+    name: Python 3.12 + MySQL 8.4
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: root_ci_only
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_DATABASE: belleza_integral_test
+          MYSQL_USER: belleza_ci
+          MYSQL_PASSWORD: belleza_ci_only
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -uroot -proot_ci_only"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+
+    env:
+      BELLEZA_TEST_DATABASE_URL: mysql+pymysql://belleza_ci:belleza_ci_only@127.0.0.1:3306/belleza_integral_test?charset=utf8mb4
+      DB_HOST: 127.0.0.1
+      DB_PORT: "3306"
+      DB_NAME: belleza_integral_test
+      DB_USER: belleza_ci
+      DB_PASSWORD: belleza_ci_only
+      JWT_SECRET_KEY: CI_BELLEZA_INTEGRAL_CLAVE_SEGURA_SOLO_PRUEBAS_2026_CI_BELLEZA_INTEGRAL
+      CORS_ORIGINS: http://localhost:5173
+      PYTHONPATH: ${{ github.workspace }}
+      TZ: America/Guatemala
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-test.txt
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-test.txt
+
+      - name: Habilitar creación segura de funciones en MySQL de CI
+        run: |
+          python - <<'PY'
+          import pymysql
+          conexion = pymysql.connect(
+              host="127.0.0.1",
+              port=3306,
+              user="root",
+              password="root_ci_only",
+              autocommit=True,
+          )
+          try:
+              with conexion.cursor() as cursor:
+                  cursor.execute("SET GLOBAL log_bin_trust_function_creators = 1")
+                  cursor.execute("SELECT @@GLOBAL.log_bin_trust_function_creators")
+                  assert cursor.fetchone()[0] == 1
+          finally:
+              conexion.close()
+          PY
+
+      - name: Validar sintaxis Python
+        run: python -m compileall -q app scripts tests
+
+      - name: Preparar base de datos, tablas e información coherente
+        run: |
+          mkdir -p artifacts
+          python scripts/preparar_ci.py | tee artifacts/preparacion-bd.txt
+
+      - name: Ejecutar pruebas unitarias
+        run: |
+          pytest tests/test_unitarios.py -q \
+            --junitxml=artifacts/pruebas-unitarias.xml
+
+      - name: Ejecutar pruebas de integración e integridad
+        run: |
+          pytest tests \
+            --ignore=tests/test_unitarios.py \
+            -q --tb=short \
+            --cov=app \
+            --cov-report=term-missing \
+            --cov-report=xml:artifacts/coverage.xml \
+            --junitxml=artifacts/pruebas-integracion.xml
+
+      - name: Resumen del workflow
+        if: always()
+        run: |
+          {
+            echo "## Belleza Integral - pruebas automáticas"
+            echo ""
+            echo "- Base aislada: `belleza_integral_test`"
+            echo "- Motor: MySQL 8.4"
+            echo "- Python: 3.12"
+            echo "- Suite: pruebas unitarias + integración + integridad + concurrencia"
+            echo "- Evidencias: JUnit XML, cobertura y log de preparación de BD"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publicar evidencias
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencia-pruebas-belleza-integral
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 14

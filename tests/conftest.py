@@ -17,12 +17,14 @@ def motor():
     url = os.getenv("BELLEZA_TEST_DATABASE_URL")
     if not url:
         pytest.skip("Configura BELLEZA_TEST_DATABASE_URL para ejecutar integración MySQL.")
+
     parsed = make_url(url)
     if not parsed.database or not parsed.database.endswith("_test"):
         pytest.fail("Se requiere una base aislada terminada en _test; se limpiarán sus datos.")
 
     e = create_engine(
         url,
+        pool_pre_ping=True,
         pool_size=25,
         max_overflow=10,
         connect_args={"init_command": "SET time_zone='-06:00'"},
@@ -41,24 +43,32 @@ def motor():
         marker = c.execute(text("SHOW TABLES LIKE 'belleza_test_marker'")).first()
         tables = c.execute(text("SHOW TABLES")).all()
         if tables and not marker:
-            pytest.fail("La base contiene tablas sin marcador de pruebas. Usa una base vacía.")
-        c.execute(text("CREATE TABLE IF NOT EXISTS belleza_test_marker (id INT PRIMARY KEY)"))
+            pytest.fail(
+                "La base contiene tablas sin marcador de pruebas. "
+                "Usa una base vacía terminada en _test."
+            )
+
+        c.execute(text(
+            "CREATE TABLE IF NOT EXISTS belleza_test_marker "
+            "(id INT PRIMARY KEY, creado TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
+        ))
         c.commit()
 
         from scripts.sql_utils import cargar_sentencias
 
-        archivos = sorted((ROOT / "database").glob("00[1-7]_*.sql"))
-        for f in archivos:
-            for stmt in cargar_sentencias(f):
+        archivos = sorted((ROOT / "tests" / "sql").glob("*.sql"))
+        if not archivos:
+            pytest.fail("No existen scripts de esquema para CI en tests/sql.")
+
+        for archivo in archivos:
+            for stmt in cargar_sentencias(archivo):
                 limpio = stmt.lstrip()
-                while limpio.startswith("--"):
-                    partes = limpio.split("\n", 1)
-                    limpio = partes[1].lstrip() if len(partes) > 1 else ""
-                if not limpio or limpio.upper().startswith("USE "):
+                if not limpio:
                     continue
-                if f.name[:3] in {"001", "002", "003", "004"} and limpio.upper().startswith("CREATE TABLE "):
-                    limpio = "CREATE TABLE IF NOT EXISTS " + limpio[len("CREATE TABLE "):]
-                c.exec_driver_sql(limpio)
+                mayus = limpio.upper()
+                if mayus.startswith("CREATE DATABASE") or mayus.startswith("USE "):
+                    continue
+                c.exec_driver_sql(stmt)
                 c.commit()
 
     yield e
@@ -81,6 +91,7 @@ def app(motor):
 
     os.environ["JWT_SECRET_KEY"] = "CLAVE_SOLO_PRUEBAS_" * 6
     os.environ["CORS_ORIGINS"] = "http://localhost:5173"
+
     import app as module
     with patch("app.crear_motor", return_value=motor):
         a = module.create_app()
@@ -88,14 +99,24 @@ def app(motor):
 
     from werkzeug.security import generate_password_hash
     hashed = generate_password_hash("PasswordTest2026!", method="scrypt")
+
     with motor.begin() as c:
         for id, rol in [
             (1, "administrador"), (2, "cliente"), (3, "personal"),
             (4, "cliente"), (5, "personal"), (6, "administrador"),
         ]:
             c.execute(
-                text("INSERT INTO usuarios(id,nombre,email,password_hash,rol) VALUES(:id,:nombre,:email,:hash,:rol)"),
-                {"id": id, "nombre": "Cuenta " + str(id), "email": f"cuenta{id}@example.com", "hash": hashed, "rol": rol},
+                text(
+                    "INSERT INTO usuarios(id,nombre,email,password_hash,rol) "
+                    "VALUES(:id,:nombre,:email,:hash,:rol)"
+                ),
+                {
+                    "id": id,
+                    "nombre": "Cuenta " + str(id),
+                    "email": f"cuenta{id}@example.com",
+                    "hash": hashed,
+                    "rol": rol,
+                },
             )
     return a
 
