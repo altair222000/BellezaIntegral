@@ -24,6 +24,7 @@ jobs:
         image: mysql:8.4
         env:
           MYSQL_ROOT_PASSWORD: root_ci_only
+          MYSQL_ROOT_HOST: "%"
           MYSQL_DATABASE: belleza_integral_test
           MYSQL_USER: belleza_ci
           MYSQL_PASSWORD: belleza_ci_only
@@ -65,6 +66,26 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements-test.txt
 
+      - name: Habilitar creación segura de funciones en MySQL de CI
+        run: |
+          python - <<'PY'
+          import pymysql
+          conexion = pymysql.connect(
+              host="127.0.0.1",
+              port=3306,
+              user="root",
+              password="root_ci_only",
+              autocommit=True,
+          )
+          try:
+              with conexion.cursor() as cursor:
+                  cursor.execute("SET GLOBAL log_bin_trust_function_creators = 1")
+                  cursor.execute("SELECT @@GLOBAL.log_bin_trust_function_creators")
+                  assert cursor.fetchone()[0] == 1
+          finally:
+              conexion.close()
+          PY
+
       - name: Validar sintaxis Python
         run: python -m compileall -q app scripts tests
 
@@ -94,7 +115,7 @@ jobs:
           {
             echo "## Belleza Integral - pruebas automáticas"
             echo ""
-            echo "- Base aislada: \`belleza_integral_test\`"
+            echo "- Base aislada: `belleza_integral_test`"
             echo "- Motor: MySQL 8.4"
             echo "- Python: 3.12"
             echo "- Suite: pruebas unitarias + integración + integridad + concurrencia"
