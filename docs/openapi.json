@@ -675,28 +675,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -717,6 +707,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -850,28 +850,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -892,6 +882,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -1073,28 +1073,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -1115,6 +1105,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -1273,28 +1273,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -1315,6 +1305,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -1448,28 +1448,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -1490,6 +1480,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -1654,28 +1654,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -1696,6 +1686,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -1873,28 +1873,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -1922,6 +1912,16 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
           }
         }
       },
@@ -1941,6 +1941,52 @@
         "responses": {
           "200": {
             "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Movimiento"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Creado",
             "content": {
               "application/json": {
                 "schema": {
@@ -2035,74 +2081,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Movimiento"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -2123,6 +2113,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -2311,28 +2311,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -2353,6 +2343,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -2486,28 +2486,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -2528,6 +2518,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -2556,6 +2556,52 @@
         "responses": {
           "200": {
             "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Usuario"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Creado",
             "content": {
               "application/json": {
                 "schema": {
@@ -2650,74 +2696,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Usuario"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -2738,6 +2728,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -2912,28 +2912,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -2954,6 +2944,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -3126,28 +3126,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -3175,6 +3165,16 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
           }
         }
       },
@@ -3194,6 +3194,52 @@
         "responses": {
           "200": {
             "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Producto"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Creado",
             "content": {
               "application/json": {
                 "schema": {
@@ -3288,74 +3334,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Producto"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -3376,6 +3366,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -3557,28 +3557,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -3599,6 +3589,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -3780,28 +3780,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -3822,6 +3812,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -3989,28 +3989,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -4038,6 +4028,16 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
           }
         }
       },
@@ -4057,6 +4057,52 @@
         "responses": {
           "200": {
             "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Promocion"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Creado",
             "content": {
               "application/json": {
                 "schema": {
@@ -4151,74 +4197,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Promocion"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -4239,6 +4229,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -4418,28 +4418,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -4460,6 +4450,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -4639,28 +4639,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -4681,6 +4671,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -4728,6 +4728,63 @@
         "responses": {
           "200": {
             "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "puntos": {
+                          "type": "integer"
+                        },
+                        "cambio_realizado": {
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Creado",
             "content": {
               "application/json": {
                 "schema": {
@@ -4833,85 +4890,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer"
-                        },
-                        "puntos": {
-                          "type": "integer"
-                        },
-                        "cambio_realizado": {
-                          "type": "boolean"
-                        }
-                      }
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -4932,6 +4922,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -5112,28 +5112,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -5154,6 +5144,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -5260,28 +5260,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -5302,6 +5292,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -5407,28 +5407,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -5449,6 +5439,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -5597,28 +5597,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -5639,6 +5629,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -5812,28 +5812,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -5861,6 +5851,16 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
           }
         }
       },
@@ -5880,6 +5880,52 @@
         "responses": {
           "200": {
             "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Usuario"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Creado",
             "content": {
               "application/json": {
                 "schema": {
@@ -5974,74 +6020,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Usuario"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -6062,6 +6052,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -6242,28 +6242,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -6284,6 +6274,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -6445,28 +6445,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -6487,6 +6477,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -6639,28 +6639,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -6681,6 +6671,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -6791,28 +6791,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -6833,6 +6823,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -6968,28 +6968,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -7010,6 +7000,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -7143,28 +7143,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -7185,6 +7175,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -7326,28 +7326,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -7368,6 +7358,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -7478,28 +7478,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -7520,6 +7510,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -7606,28 +7606,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -7648,6 +7638,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -7797,28 +7797,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -7839,6 +7829,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -7959,28 +7959,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -8001,6 +7991,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -8097,6 +8097,52 @@
               }
             }
           },
+          "201": {
+            "description": "Creado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Usuario"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
           "400": {
             "description": "Validación",
             "content": {
@@ -8147,74 +8193,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Usuario"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -8235,6 +8225,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -8345,6 +8345,52 @@
               }
             }
           },
+          "201": {
+            "description": "Creado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Cita"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
           "400": {
             "description": "Validación",
             "content": {
@@ -8395,74 +8441,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Cita"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -8483,6 +8473,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -8658,28 +8658,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -8700,6 +8690,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -8833,28 +8833,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -8875,6 +8865,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -9048,28 +9048,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -9090,6 +9080,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -9238,28 +9238,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -9280,6 +9270,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -9362,28 +9362,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -9404,6 +9394,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -9486,28 +9486,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -9528,6 +9518,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -9556,6 +9556,52 @@
         "responses": {
           "200": {
             "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Pedido"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Creado",
             "content": {
               "application/json": {
                 "schema": {
@@ -9650,74 +9696,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Pedido"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -9738,6 +9728,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -9947,28 +9947,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -9989,6 +9979,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -10137,28 +10137,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -10179,6 +10169,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -10300,28 +10300,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -10342,6 +10332,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -10474,28 +10474,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -10516,6 +10506,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -10553,6 +10553,52 @@
         "responses": {
           "200": {
             "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Horario"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Creado",
             "content": {
               "application/json": {
                 "schema": {
@@ -10647,74 +10693,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Horario"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -10735,6 +10725,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -10910,28 +10910,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -10952,6 +10942,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -11096,28 +11096,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -11138,6 +11128,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -11265,28 +11265,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -11307,6 +11297,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -11335,6 +11335,75 @@
         "responses": {
           "200": {
             "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "puntos_canjeados": {
+                          "type": "integer"
+                        },
+                        "saldo": {
+                          "type": "integer"
+                        },
+                        "beneficio": {
+                          "type": "string"
+                        },
+                        "puntos": {
+                          "type": "integer"
+                        },
+                        "motivo": {
+                          "type": "string"
+                        },
+                        "promocion_id": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Creado",
             "content": {
               "application/json": {
                 "schema": {
@@ -11452,97 +11521,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer"
-                        },
-                        "puntos_canjeados": {
-                          "type": "integer"
-                        },
-                        "saldo": {
-                          "type": "integer"
-                        },
-                        "beneficio": {
-                          "type": "string"
-                        },
-                        "puntos": {
-                          "type": "integer"
-                        },
-                        "motivo": {
-                          "type": "string"
-                        },
-                        "promocion_id": {
-                          "type": "integer"
-                        }
-                      }
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -11563,6 +11553,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -11739,28 +11739,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -11781,6 +11771,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -11917,28 +11917,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -11959,6 +11949,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -12103,28 +12103,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -12152,6 +12142,16 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
           }
         }
       },
@@ -12171,6 +12171,52 @@
         "responses": {
           "200": {
             "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Servicio"
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "pagina": {
+                          "type": "integer"
+                        },
+                        "limite": {
+                          "type": "integer"
+                        },
+                        "cantidad": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "paginas": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Creado",
             "content": {
               "application/json": {
                 "schema": {
@@ -12265,74 +12311,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Creado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Servicio"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "pagina": {
-                          "type": "integer"
-                        },
-                        "limite": {
-                          "type": "integer"
-                        },
-                        "cantidad": {
-                          "type": "integer"
-                        },
-                        "total": {
-                          "type": "integer"
-                        },
-                        "paginas": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "message",
-                    "data"
-                  ]
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -12353,6 +12343,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -12532,28 +12532,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -12574,6 +12564,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -12753,28 +12753,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -12795,6 +12785,16 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -12955,28 +12955,18 @@
               }
             }
           },
-          "415": {
-            "description": "Tipo de contenido inválido",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Base de datos no disponible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Respuesta"
-                }
-              }
-            }
-          },
           "413": {
             "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
             "content": {
               "application/json": {
                 "schema": {
@@ -12997,6 +12987,482 @@
           },
           "500": {
             "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/health/schema": {
+      "get": {
+        "operationId": "api_verificar_esquema",
+        "summary": "Verificar esquema de integridad",
+        "tags": [
+          "api"
+        ],
+        "security": [],
+        "description": "Roles: público. Verifica la presencia de la capa avanzada de integridad cuando está instalada.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validación",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Sesión ausente, inválida o vencida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Rol no autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No encontrado o recurso ajeno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflicto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Demasiados intentos de login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/auditoria/cambios": {
+      "get": {
+        "operationId": "auditoria_cambios",
+        "summary": "Consultar auditoría de cambios",
+        "tags": [
+          "auditoria"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Roles: administrador.",
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 64
+            }
+          },
+          {
+            "name": "operacion",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "INSERT",
+                "UPDATE",
+                "DELETE"
+              ]
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000,
+              "default": 1
+            }
+          },
+          {
+            "name": "limite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validación",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Sesión ausente, inválida o vencida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Rol no autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No encontrado o recurso ajeno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflicto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Demasiados intentos de login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/auditoria/eventos": {
+      "get": {
+        "operationId": "auditoria_eventos",
+        "summary": "Consultar auditoría de eventos",
+        "tags": [
+          "auditoria"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Roles: administrador.",
+        "parameters": [
+          {
+            "name": "tipo_evento",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 80
+            }
+          },
+          {
+            "name": "entidad",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 64
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000,
+              "default": 1
+            }
+          },
+          {
+            "name": "limite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validación",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Sesión ausente, inválida o vencida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Rol no autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No encontrado o recurso ajeno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflicto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Solicitud o exportación demasiado grande",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Tipo de contenido inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Demasiados intentos de login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Base de datos no disponible",
             "content": {
               "application/json": {
                 "schema": {

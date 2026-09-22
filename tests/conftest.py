@@ -12,11 +12,25 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 
+def _archivos_sql_prueba():
+    """Devuelve el esquema dedicado de CI; usa database/ solo como respaldo."""
+    test_sql = sorted((ROOT / "tests" / "sql").glob("*.sql"))
+    if test_sql:
+        return test_sql
+    return sorted((ROOT / "database").glob("00[1-7]_*.sql"))
+
+
 @pytest.fixture(scope="session")
 def motor():
     url = os.getenv("BELLEZA_TEST_DATABASE_URL")
     if not url:
+        if os.getenv("CI"):
+            pytest.fail(
+                "BELLEZA_TEST_DATABASE_URL es obligatoria en CI; "
+                "no se permiten pruebas MySQL omitidas."
+            )
         pytest.skip("Configura BELLEZA_TEST_DATABASE_URL para ejecutar integración MySQL.")
+
     parsed = make_url(url)
     if not parsed.database or not parsed.database.endswith("_test"):
         pytest.fail("Se requiere una base aislada terminada en _test; se limpiarán sus datos.")
@@ -42,24 +56,65 @@ def motor():
         tables = c.execute(text("SHOW TABLES")).all()
         if tables and not marker:
             pytest.fail("La base contiene tablas sin marcador de pruebas. Usa una base vacía.")
+
         c.execute(text("CREATE TABLE IF NOT EXISTS belleza_test_marker (id INT PRIMARY KEY)"))
         c.commit()
 
         from scripts.sql_utils import cargar_sentencias
 
-        archivos = sorted((ROOT / "database").glob("00[1-7]_*.sql"))
+        archivos = _archivos_sql_prueba()
+        if not archivos:
+            pytest.fail("No se encontró un esquema SQL para preparar la base de pruebas.")
+
         for f in archivos:
             for stmt in cargar_sentencias(f):
                 limpio = stmt.lstrip()
                 while limpio.startswith("--"):
                     partes = limpio.split("\n", 1)
                     limpio = partes[1].lstrip() if len(partes) > 1 else ""
-                if not limpio or limpio.upper().startswith("USE "):
+
+                upper = limpio.upper()
+                if (
+                    not limpio
+                    or upper.startswith("USE ")
+                    or upper.startswith("CREATE DATABASE ")
+                ):
                     continue
-                if f.name[:3] in {"001", "002", "003", "004"} and limpio.upper().startswith("CREATE TABLE "):
-                    limpio = "CREATE TABLE IF NOT EXISTS " + limpio[len("CREATE TABLE "):]
+
+                if (
+                    f.name[:3] in {"001", "002", "003", "004"}
+                    and upper.startswith("CREATE TABLE ")
+                    and not upper.startswith("CREATE TABLE IF NOT EXISTS ")
+                ):
+                    limpio = (
+                        "CREATE TABLE IF NOT EXISTS "
+                        + limpio[len("CREATE TABLE "):]
+                    )
+
                 c.exec_driver_sql(limpio)
                 c.commit()
+
+        requeridas = {
+            "usuarios",
+            "servicios",
+            "disponibilidades",
+            "citas",
+            "productos",
+            "pedidos",
+            "pedido_detalle",
+            "promociones",
+            "puntos_historial",
+            "movimientos_inventario",
+            "tokens_revocados",
+            "sesiones_usuario",
+        }
+        presentes = {fila[0] for fila in c.execute(text("SHOW TABLES")).all()}
+        faltantes = requeridas - presentes
+        if faltantes:
+            pytest.fail(
+                "El esquema de pruebas quedó incompleto: "
+                + ", ".join(sorted(faltantes))
+            )
 
     yield e
     e.dispose()
@@ -69,34 +124,54 @@ def motor():
 def app(motor):
     with motor.connect() as c:
         c.exec_driver_sql("SET FOREIGN_KEY_CHECKS=0")
+        presentes = {fila[0] for fila in c.execute(text("SHOW TABLES")).all()}
         for table in (
             "auditoria_eventos", "auditoria_cambios", "puntos_historial",
             "movimientos_inventario", "pedido_detalle", "pedidos", "promociones",
             "productos", "sesiones_usuario", "tokens_revocados", "citas",
             "disponibilidades", "servicios", "usuarios",
         ):
-            c.exec_driver_sql("TRUNCATE TABLE " + table)
+            if table in presentes:
+                c.exec_driver_sql("TRUNCATE TABLE " + table)
         c.exec_driver_sql("SET FOREIGN_KEY_CHECKS=1")
         c.commit()
 
     os.environ["JWT_SECRET_KEY"] = "CLAVE_SOLO_PRUEBAS_" * 6
     os.environ["CORS_ORIGINS"] = "http://localhost:5173"
+
     import app as module
+
     with patch("app.crear_motor", return_value=motor):
         a = module.create_app()
     a.config["TESTING"] = True
 
     from werkzeug.security import generate_password_hash
+
     hashed = generate_password_hash("PasswordTest2026!", method="scrypt")
     with motor.begin() as c:
         for id, rol in [
-            (1, "administrador"), (2, "cliente"), (3, "personal"),
-            (4, "cliente"), (5, "personal"), (6, "administrador"),
+            (1, "administrador"),
+            (2, "cliente"),
+            (3, "personal"),
+            (4, "cliente"),
+            (5, "personal"),
+            (6, "administrador"),
         ]:
             c.execute(
-                text("INSERT INTO usuarios(id,nombre,email,password_hash,rol) VALUES(:id,:nombre,:email,:hash,:rol)"),
-                {"id": id, "nombre": "Cuenta " + str(id), "email": f"cuenta{id}@example.com", "hash": hashed, "rol": rol},
+                text(
+                    "INSERT INTO usuarios("
+                    "id,nombre,email,password_hash,rol"
+                    ") VALUES(:id,:nombre,:email,:hash,:rol)"
+                ),
+                {
+                    "id": id,
+                    "nombre": "Cuenta " + str(id),
+                    "email": f"cuenta{id}@example.com",
+                    "hash": hashed,
+                    "rol": rol,
+                },
             )
+
     return a
 
 
@@ -112,8 +187,10 @@ def headers(app):
     def make(id=1):
         with app.app_context():
             return {
-                "Authorization": "Bearer " + create_access_token(
-                    identity=str(id), additional_claims={"version": 0}
+                "Authorization": "Bearer "
+                + create_access_token(
+                    identity=str(id),
+                    additional_claims={"version": 0},
                 )
             }
 
